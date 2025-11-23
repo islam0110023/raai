@@ -1,0 +1,22 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    avoid_print: true
+    prefer_single_quotes: true
+    always_use_package_imports: true
+    avoid_unnecessary_containers: true
+    sort_constructors_first: true
+    prefer_const_constructors: true
+    prefer_const_literals_to_create_immutables: true
+    use_key_in_widget_constructors: true
+    unnecessary_this: true
+    avoid_empty_else: true
+    curly_braces_in_flow_control_structures: true
+    prefer_final_locals: true
+    prefer_final_in_for_each: true
+    type_annotate_public_apis: true
+    avoid_classes_with_only_static_members: false
+    depend_on_referenced_packages: true
+    unnecessary_late: true
+    sized_box_for_whitespace: true
