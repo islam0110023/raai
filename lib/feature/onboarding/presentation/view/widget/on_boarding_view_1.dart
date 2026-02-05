@@ -14,10 +14,7 @@ class OnBoardingView1 extends StatelessWidget {
     return Column(
       children: [
         const RSizedBox(height: 84),
-        Text(
-          'أهلاً بيك فى راعي!',
-          style: AppTextStyles.s24.w700.textNormal,
-        ),
+        Text('أهلاً بيك فى راعي!', style: AppTextStyles.s24.w700.textNormal),
         const RSizedBox(height: 24),
         Text(
           textAlign: TextAlign.center,

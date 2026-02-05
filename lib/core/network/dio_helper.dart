@@ -1,7 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:raai/core/network/auth_interceptor.dart';
 import 'package:raai/core/network/dio_end_piont.dart';
-import 'package:raai/core/secure_storage/secure_storage.dart';
+import 'package:raai/core/network/refresh_interceptor.dart';
+import 'package:raai/core/services/token_manager.dart';
+import 'package:raai/core/utils/service_locator.dart';
+import 'package:raai/feature/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 
 /// A helper class for making HTTP requests using Dio.
 class DioHelper {
@@ -13,14 +17,18 @@ class DioHelper {
       BaseOptions(
         baseUrl: Endpoints.baseUrl,
         receiveDataWhenStatusError: true,
+        responseType: ResponseType.json,
+        connectTimeout: const Duration(seconds: 30),
+        receiveTimeout: const Duration(seconds: 30),
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+          'Accept': 'application/json',
         },
       ),
     );
-    dio.interceptors.add(
+    dio.interceptors.addAll([
       PrettyDioLogger(
         requestBody: true,
         error: true,
@@ -28,7 +36,15 @@ class DioHelper {
         requestHeader: true,
         responseHeader: true,
       ),
-    );
+      AuthInterceptor(getIt<TokenManager>()),
+      RefreshInterceptor(
+        getIt(),
+        getIt(),
+        onForceLogout: () {
+          getIt<AuthCubit>().clear();
+        },
+      ),
+    ]);
   }
 
   /// Makes a GET request to the specified URL.
@@ -46,17 +62,19 @@ class DioHelper {
     ProgressCallback? onReceiveProgress,
     String? token,
     Map<String, dynamic>? data,
+    Options? options,
   }) async {
     try {
-      dio.options.headers = {
-        'Authorization': 'Bearer ${await SecureStorage.getUserToken()}',
-        'Accept': 'application/json',
-      };
+      // dio.options.headers = {
+      //   'Authorization': 'Bearer ${await SecureStorage.getUserToken()}',
+      //   'Accept': 'application/json',
+      // };
       final Response response = await dio.get(
         url,
         queryParameters: queryParameters,
         onReceiveProgress: onReceiveProgress,
         data: data,
+        options: options,
       );
       return response;
     } catch (e) {
@@ -81,17 +99,19 @@ class DioHelper {
     String? token,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
+    Options? options,
   }) async {
     try {
-      dio.options.headers = {
-        'Authorization': 'Bearer ${await SecureStorage.getUserToken()}',
-        'Accept': 'application/json',
-      };
+      // dio.options.headers = {
+      //   'Authorization': 'Bearer ${await SecureStorage.getUserToken()}',
+      //   'Accept': 'application/json',
+      // };
       final Response response = await dio.post(
         url,
         data: formData,
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
+        options: options,
       );
       return response;
     } catch (e) {
@@ -115,17 +135,19 @@ class DioHelper {
     String? token,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
+    Options? options,
   }) async {
     try {
-      dio.options.headers = {
-        'Authorization': 'Bearer ${await SecureStorage.getUserToken()}',
-        'Accept': 'application/json',
-      };
+      // dio.options.headers = {
+      //   'Authorization': 'Bearer ${await SecureStorage.getUserToken()}',
+      //   'Accept': 'application/json',
+      // };
       final Response response = await dio.post(
         url,
         data: data,
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
+        options: options,
       );
       return response;
     } catch (e) {
@@ -149,17 +171,21 @@ class DioHelper {
     String? token,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
+    Options? options,
+    Map<String, dynamic>? queryParameters,
   }) async {
     try {
-      dio.options.headers = {
-        'Authorization': 'Bearer ${await SecureStorage.getUserToken()}',
-        'Accept': 'application/json',
-      };
+      // dio.options.headers = {
+      //   'Authorization': 'Bearer ${await SecureStorage.getUserToken()}',
+      //   'Accept': 'application/json',
+      // };
       final Response response = await dio.put(
         url,
         data: data,
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
+        options: options,
+        queryParameters: queryParameters,
       );
       return response;
     } catch (e) {
@@ -179,13 +205,18 @@ class DioHelper {
     required String url,
     required Map<String, dynamic> data,
     required String token,
+    Options? options,
   }) async {
     try {
-      dio.options.headers = {
-        'Authorization': 'Bearer ${await SecureStorage.getUserToken()}',
-        'Content-Type': 'application/json',
-      };
-      final Response response = await dio.patch(url, data: data);
+      // dio.options.headers = {
+      //   'Authorization': 'Bearer ${await SecureStorage.getUserToken()}',
+      //   'Content-Type': 'application/json',
+      // };
+      final Response response = await dio.patch(
+        url,
+        data: data,
+        options: options,
+      );
       return response;
     } catch (e) {
       rethrow;
@@ -204,13 +235,18 @@ class DioHelper {
     required String url,
     Map<String, dynamic>? data,
     required String token,
+    Options? options,
   }) async {
     try {
-      dio.options.headers = {
-        'Authorization': 'Bearer ${await SecureStorage.getUserToken()}',
-        'Content-Type': 'application/json',
-      };
-      final Response response = await dio.delete(url, data: data);
+      // dio.options.headers = {
+      //   'Authorization': 'Bearer ${await SecureStorage.getUserToken()}',
+      //   'Content-Type': 'application/json',
+      // };
+      final Response response = await dio.delete(
+        url,
+        data: data,
+        options: options,
+      );
       return response;
     } catch (e) {
       rethrow;

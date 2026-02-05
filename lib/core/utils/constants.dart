@@ -1,14 +1,17 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:raai/core/utils/app_color.dart';
 
 abstract class AppConstant {
   static const kFontFamily = 'ReadEx Pro';
   static const cacheKeyUserTokenKeyName = 'userToken';
   static const cacheKeyUserRoleKeyName = 'userRole';
   static const cacheKeyShowOnBoarding = 'showOnBoarding';
+  static const cacheKeyIsLoggedIn = 'isLoggedIn';
   static const kDurationSplash = 3;
-
 
   static void precacheAppImages(BuildContext context) {
     final List<AssetImage> imagesToPrecache = [];
@@ -16,6 +19,18 @@ abstract class AppConstant {
     for (final image in imagesToPrecache) {
       precacheImage(image, context);
     }
+  }
+
+  static String formatRecordedAtLikeUI(String isoDate) {
+    final date = DateTime.parse(isoDate).toLocal();
+
+    final time = DateFormat('h:mm', 'en').format(date);
+    final amPm = DateFormat('a', 'ar').format(date); // ص / م
+    final day = DateFormat('d', 'en').format(date);
+    final month = DateFormat('MMMM', 'ar').format(date);
+    final year = DateFormat('y', 'en').format(date);
+
+    return '$time $amPm $day $month $year';
   }
 
   // static ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
@@ -39,34 +54,37 @@ abstract class AppConstant {
   //   );
   // }
 
-  // static void showLoadingDialog(BuildContext context) {
-  //   showDialog(
-  //     context: context,
-  //     barrierDismissible: false,
-  //     builder: (context) {
-  //       return Dialog(
-  //         backgroundColor: Colors.white,
-  //         insetPadding: EdgeInsets.symmetric(horizontal: AppDimensions.r140),
-  //         shape: RoundedRectangleBorder(
-  //           borderRadius: BorderRadius.circular(AppDimensions.r15),
-  //         ),
-  //         alignment: Alignment.center,
-  //         child: Padding(
-  //           padding: EdgeInsets.all(AppDimensions.r12),
-  //           child: SizedBox(
-  //             width: AppDimensions.r60,
-  //             height: AppDimensions.r60,
-  //             child: Theme.of(context).platform == TargetPlatform.iOS
-  //                 ? const Center(child: CupertinoActivityIndicator())
-  //                 : const Center(
-  //                     child: CircularProgressIndicator(color: AppColor.cyan500),
-  //                   ),
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
+  static void showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      useRootNavigator: true,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: Colors.white,
+          insetPadding: EdgeInsets.symmetric(horizontal: 140.r),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.r),
+          ),
+          alignment: Alignment.center,
+          child: Padding(
+            padding: EdgeInsets.all(12.r),
+            child: SizedBox(
+              width: 60.r,
+              height: 60.r,
+              child: Theme.of(context).platform == TargetPlatform.iOS
+                  ? const Center(child: CupertinoActivityIndicator())
+                  : const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColor.primaryNormal,
+                      ),
+                    ),
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   static Map<String, dynamic> decodeJwt(String token) {
     final parts = token.split('.');

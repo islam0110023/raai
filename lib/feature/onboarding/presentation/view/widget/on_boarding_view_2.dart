@@ -29,10 +29,7 @@ class OnBoardingView2 extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         const RSizedBox(height: 45),
-        Text(
-          'لا تفوت أي جرعة',
-          style: AppTextStyles.s14.w400.subTextNormal,
-        ),
+        Text('لا تفوت أي جرعة', style: AppTextStyles.s14.w400.subTextNormal),
       ],
     );
   }

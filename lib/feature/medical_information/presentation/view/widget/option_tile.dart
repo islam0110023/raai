@@ -21,7 +21,7 @@ class OptionTile extends StatelessWidget {
       borderRadius: BorderRadius.circular(30.r),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 400),
-        curve:Curves.easeInOut,
+        curve: Curves.easeInOut,
         padding: REdgeInsets.all(16),
         decoration: BoxDecoration(
           color: isSelected ? AppColor.primaryNormal : Colors.white,

@@ -13,6 +13,7 @@ class AppButton extends StatelessWidget {
     this.textStyle,
     this.width,
     required this.radius,
+    this.isOutline = false,
   });
 
   factory AppButton.filled({
@@ -33,15 +34,18 @@ class AppButton extends StatelessWidget {
       onPressed: onPressed,
       loading: loading,
       width: width,
+      isOutline: false,
       radius: radius!,
       style: ElevatedButton.styleFrom(
         // disabledBackgroundColor: AppColor.teal200,
         backgroundColor: buttonColor,
         minimumSize: size,
+        elevation: 0,
         padding:
             padding ?? EdgeInsets.symmetric(vertical: 12.r, horizontal: 24.r),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius.r),
+          side: BorderSide(color: AppColor.secondaryLightHover, width: 3.r),
         ),
       ),
       textStyle: textStyle ?? AppTextStyles.s16.w500.white,
@@ -68,6 +72,7 @@ class AppButton extends StatelessWidget {
       onPressed: onPressed,
       loading: loading,
       width: width,
+      isOutline: true,
       radius: radius!,
       style: OutlinedButton.styleFrom(
         backgroundColor: AppColor.white,
@@ -91,17 +96,20 @@ class AppButton extends StatelessWidget {
   final TextStyle? textStyle;
   final double? width;
   final double radius;
+  final bool isOutline;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: width ?? double.infinity,
       child: Container(
-        padding: REdgeInsets.all(3),
-        decoration: BoxDecoration(
-          color: AppColor.secondaryLightHover,
-          borderRadius: BorderRadius.circular(radius.r),
-        ),
+        padding: isOutline ? REdgeInsets.all(3) : null,
+        decoration: isOutline
+            ? BoxDecoration(
+                color: AppColor.secondaryLightHover,
+                borderRadius: BorderRadius.circular(radius.r),
+              )
+            : null,
         child: ElevatedButton(
           style: style,
           onPressed: loading ? null : onPressed,

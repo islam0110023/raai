@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raai/core/utils/app_color.dart';
 import 'package:raai/core/utils/styling.dart';
 import 'package:raai/core/widget/app_button.dart';
+import 'package:raai/feature/personal_info/presentation/manager/personal_cubit.dart';
 
 class CustomSelectGenderPersonalInfo extends StatefulWidget {
   const CustomSelectGenderPersonalInfo({super.key});
@@ -19,6 +21,8 @@ class _CustomSelectGenderPersonalInfoState
 
   @override
   Widget build(BuildContext context) {
+    final controller = context.read<PersonalCubit>();
+
     return Row(
       spacing: 16.w,
       children: [
@@ -29,6 +33,7 @@ class _CustomSelectGenderPersonalInfoState
               setState(() {
                 isMale = true;
                 isFemale = false;
+                controller.changeGender(true);
               });
             },
             radius: 8,
@@ -47,6 +52,7 @@ class _CustomSelectGenderPersonalInfoState
               setState(() {
                 isMale = false;
                 isFemale = true;
+                controller.changeGender(false);
               });
             },
             radius: 8,

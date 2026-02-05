@@ -105,6 +105,7 @@ class AppTextField extends StatelessWidget {
             hintText: hint,
             filled: true,
             fillColor: Colors.white,
+            errorStyle: AppTextStyles.s14.w400.redNormal,
             labelStyle: AppTextStyles.s14.w300.subTextNormal,
             hintStyle: AppTextStyles.s14.w400.subTextNormal,
             helperText: helperText,

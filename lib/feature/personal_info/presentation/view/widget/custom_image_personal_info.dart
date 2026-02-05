@@ -5,9 +5,7 @@ import 'package:iconify_flutter/icons/bx.dart';
 import 'package:raai/core/utils/app_color.dart';
 
 class CustomImagePersonalInfo extends StatelessWidget {
-  const CustomImagePersonalInfo({
-    super.key,
-  });
+  const CustomImagePersonalInfo({super.key});
 
   @override
   Widget build(BuildContext context) {

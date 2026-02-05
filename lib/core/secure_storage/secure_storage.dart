@@ -19,6 +19,7 @@ abstract class SecureStorage {
   }) async {
     try {
       await _storage.write(key: key, value: value);
+      log('SecureStorage saved: $value');
     } catch (e) {
       log('SecureStorage error: $e');
       await _storage.deleteAll();
@@ -26,15 +27,16 @@ abstract class SecureStorage {
     }
   }
 
-  static Future<void> saveUserToken({
-    required String? token,
-    required String? role,
-  }) async {
+  static Future<void> saveUserToken({required String? token}) async {
     await saveData(
       key: AppConstant.cacheKeyUserTokenKeyName,
       value: token ?? '',
     );
-    await saveData(key: AppConstant.cacheKeyUserRoleKeyName, value: role ?? '');
+  }
+
+  static Future<void> clear() async {
+    await _storage.delete(key: AppConstant.cacheKeyUserTokenKeyName);
+    log('SecureStorage cleared');
   }
 
   static Future<String?> getUserToken() async {

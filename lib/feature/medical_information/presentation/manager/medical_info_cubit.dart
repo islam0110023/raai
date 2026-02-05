@@ -1,14 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:raai/core/failure/api_error_mapper.dart';
 import 'package:raai/feature/medical_information/data/model/survey_question.dart';
+import 'package:raai/feature/medical_information/domain/use_case/set_medical_use_case.dart';
 
 part 'medical_info_state.dart';
 
 class MedicalInfoCubit extends Cubit<MedicalInfoState> {
-  MedicalInfoCubit() : super(MedicalInfoInitial());
+  MedicalInfoCubit(this.setMedicalUseCase) : super(MedicalInfoInitial()) {
+    init();
+  }
+  final SetMedicalUseCase setMedicalUseCase;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
+  late TextEditingController weightController;
+  late TextEditingController heightController;
+
+  void init() {
+    weightController = TextEditingController();
+    heightController = TextEditingController();
+  }
 
   int count = 0;
+  void setMedical() async {
+    emit(MedicalInfoLoading());
+    final result = await setMedicalUseCase(data: buildRequestJson());
+    result.fold(
+      (failure) {
+        final message = ApiErrorMapper.getArabicMessage(failure.appCode);
+
+        emit(MedicalInfoFailure(message, failure.appCode));
+      },
+      (success) {
+        emit(MedicalInfoSuccess());
+      },
+    );
+  }
 
   List<int?> selectedIndexes = List.filled(9, null);
 
@@ -23,11 +52,26 @@ class MedicalInfoCubit extends Cubit<MedicalInfoState> {
     emit(MedicalInfoInitial());
   }
 
+  void updateWeight() {
+    answers['weight'] = weightController.text;
+    emit(MedicalInfoInitial());
+  }
+
+  void updateHeight() {
+    answers['height'] = heightController.text;
+    emit(MedicalInfoInitial());
+  }
+
   void increment() {
     if (count < surveyQuestions.length - 1) {
       count++;
       emit(MedicalInfoInitial());
     }
+  }
+
+  void changeAutoValidateMode() {
+    autoValidateMode = AutovalidateMode.always;
+    emit(MedicalInfoInitial());
   }
 
   void decrement() {
@@ -64,7 +108,7 @@ class MedicalInfoCubit extends Cubit<MedicalInfoState> {
       key: 'weight',
       question: 'وزنك كام كيلو؟',
       type: QuestionType.number,
-      options: ['وزنك كام كيلو',],
+      options: ['وزنك كام كيلو'],
     ),
     const SurveyQuestion(
       id: 5,
@@ -108,4 +152,105 @@ class MedicalInfoCubit extends Cubit<MedicalInfoState> {
       options: ['بنام كويس', 'النوم متقطع', 'عندي صعوبة في النوم'],
     ),
   ];
+  Map<String, dynamic> buildRequestJson() {
+    return {
+      'hypertension': _mapYesNoToBool(answers['hypertension']),
+      'heartDisease': _mapYesNoToBool(answers['heart_disease']),
+      'diabetes': _mapDiabetesStatus(answers['diabetes']),
+      'weightKg': _toInt(answers['weight']),
+      'heightCm': _toInt(answers['height']),
+      'smokingStatus': _mapSmokingStatus(answers['smoking_status']),
+      'activityLevel': _mapActivityLevel(answers['activity_level']),
+      'familyHistory': _mapFamilyHistory(answers['family_history']),
+      'sleepQuality': _mapSleepQuality(answers['sleep_quality']),
+    };
+  }
+
+  bool _mapYesNoToBool(dynamic value) {
+    return value?.toString().trim() == 'نعم';
+  }
+
+  String _mapDiabetesStatus(dynamic value) {
+    switch (value) {
+      case 'نعم':
+        return 'YES';
+      case 'لا':
+        return 'NO';
+      case 'مقاومة إنسولين':
+        return 'INSULIN_RESISTANCE';
+      default:
+        return 'NO';
+    }
+  }
+
+  String _mapSmokingStatus(dynamic value) {
+    switch (value) {
+      case 'مدخّنتش قبل كدا':
+        return 'NEVER';
+      case 'كان بيدخّن زمان وبطّل':
+        return 'FORMER';
+      case 'بيدخّن دلوقتي':
+        return 'CURRENT';
+      case 'مبطل قريب':
+        return 'RECENTLY_QUIT';
+      case 'دخّن قبل كدا':
+        return 'SMOKED_BEFORE';
+      default:
+        return 'NEVER';
+    }
+  }
+
+  String _mapActivityLevel(dynamic value) {
+    switch (value) {
+      case 'قليل جدًا':
+        return 'VERY_LOW';
+      case 'متوسط':
+        return 'MEDIUM';
+      case 'عالي':
+        return 'HIGH';
+      case 'بمشي كتير يوميًا':
+        return 'VERY_ACTIVE';
+      default:
+        return 'MEDIUM';
+    }
+  }
+
+  String _mapSleepQuality(dynamic value) {
+    switch (value) {
+      case 'بنام كويس':
+        return 'GOOD';
+      case 'النوم متقطع':
+        return 'INTERRUPTED';
+      case 'عندي صعوبة في النوم':
+        return 'DIFFICULT';
+      default:
+        return 'GOOD';
+    }
+  }
+
+  String _mapFamilyHistory(dynamic value) {
+    switch (value) {
+      case 'نعم':
+        return 'YES';
+      case 'لا':
+        return 'NO';
+      case 'مش متأكد':
+        return 'NOT_SURE';
+      default:
+        return 'NOT_SURE';
+    }
+  }
+
+  int _toInt(dynamic value) {
+    if (value == null) return 0;
+    return int.tryParse(value.toString()) ?? 0;
+  }
+
+  @override
+  Future<void> close() {
+    // TODO: implement close
+    weightController.dispose();
+    heightController.dispose();
+    return super.close();
+  }
 }

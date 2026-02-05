@@ -1,14 +1,9 @@
 import 'package:flutter/foundation.dart';
 
-enum QuestionType {
-  boolean,
-  number,
-  singleChoice,
-}
+enum QuestionType { boolean, number, singleChoice }
 
 @immutable
 class SurveyQuestion {
-
   const SurveyQuestion({
     required this.id,
     required this.key,

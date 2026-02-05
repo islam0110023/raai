@@ -6,9 +6,7 @@ import 'package:raai/core/utils/app_icons.dart';
 import 'package:raai/core/utils/styling.dart';
 
 class CustomButtonOnBoarding extends StatelessWidget {
-  const CustomButtonOnBoarding({
-    super.key, required this.onPressed,
-  });
+  const CustomButtonOnBoarding({super.key, required this.onPressed});
   final VoidCallback onPressed;
 
   @override
@@ -22,10 +20,7 @@ class CustomButtonOnBoarding extends StatelessWidget {
         padding: REdgeInsets.all(16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(45.r),
-          side: BorderSide(
-            width: 3.r,
-            color: AppColor.secondaryLightHover,
-          ),
+          side: BorderSide(width: 3.r, color: AppColor.secondaryLightHover),
         ),
       ),
       icon: Text('التالي', style: AppTextStyles.s16.w700.white),

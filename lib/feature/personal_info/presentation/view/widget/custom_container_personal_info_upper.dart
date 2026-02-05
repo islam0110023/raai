@@ -4,9 +4,7 @@ import 'package:raai/core/utils/app_color.dart';
 import 'package:raai/core/utils/styling.dart';
 
 class CustomContainerPersonalInfoUpper extends StatelessWidget {
-  const CustomContainerPersonalInfoUpper({
-    super.key,
-  });
+  const CustomContainerPersonalInfoUpper({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +23,7 @@ class CustomContainerPersonalInfoUpper extends StatelessWidget {
           ),
         ),
         alignment: const Alignment(0, 0),
-        child: Text(
-          'البيانات الشخصيه',
-          style: AppTextStyles.s24.w700.black,
-        ),
+        child: Text('البيانات الشخصيه', style: AppTextStyles.s24.w700.black),
       ),
     );
   }

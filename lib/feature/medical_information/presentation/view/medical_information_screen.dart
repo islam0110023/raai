@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:raai/core/utils/constants.dart';
 import 'package:raai/core/utils/routes.dart';
 import 'package:raai/core/widget/app_button.dart';
 import 'package:raai/core/widget/show_animated_top_snack_bar.dart';
@@ -40,12 +41,29 @@ class MedicalInformationScreen extends StatelessWidget {
               child: AppButton.filled(
                 text: 'التالي',
                 onPressed: () {
+                  final currentQuestion =
+                      controller.surveyQuestions[state.count];
+
                   if (state.count <= 7) {
                     if (state.answers[controller
                             .surveyQuestions[state.count]
                             .key] !=
-                        null || state.count==3||state.count==4) {
+                        null) {
                       controller.increment();
+                    } else if (currentQuestion.id == 4 ||
+                        currentQuestion.id == 5) {
+                      if (controller.formKey.currentState!.validate()) {
+                        controller.formKey.currentState!.save();
+                        controller.increment();
+                        if (currentQuestion.id == 4) {
+                          controller.updateWeight();
+                        }
+                        if (currentQuestion.id == 5) {
+                          controller.updateHeight();
+                        }
+                      } else {
+                        controller.changeAutoValidateMode();
+                      }
                     } else {
                       showAnimatedTopSnackBar(
                         context,
@@ -55,10 +73,42 @@ class MedicalInformationScreen extends StatelessWidget {
                       );
                     }
                   } else {
-                    context.go(AppRoutes.confirmationScreen);
+                    controller.setMedical();
                   }
                 },
               ),
+            ),
+            BlocListener<MedicalInfoCubit, MedicalInfoState>(
+              listener: (context, state) {
+                if (state is MedicalInfoSuccess) {
+                  if (Navigator.of(context, rootNavigator: true).canPop()) {
+                    Navigator.of(context, rootNavigator: true).pop();
+                  }
+
+                  showAnimatedTopSnackBar(
+                    context,
+                    message: 'تم حفظ البيانات بنجاح',
+                    subMessage: 'تم اكمال جميع الخطوات',
+                  );
+                  context.go(AppRoutes.confirmationScreen);
+                }
+                if (state is MedicalInfoFailure) {
+                  if (Navigator.of(context, rootNavigator: true).canPop()) {
+                    Navigator.of(context, rootNavigator: true).pop();
+                  }
+
+                  showAnimatedTopSnackBar(
+                    context,
+                    isError: true,
+                    message: 'في مشكلة',
+                    subMessage: state.message,
+                  );
+                }
+                if (state is MedicalInfoLoading) {
+                  AppConstant.showLoadingDialog(context);
+                }
+              },
+              child: const SizedBox.shrink(),
             ),
           ],
         ),

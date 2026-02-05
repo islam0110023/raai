@@ -10,36 +10,47 @@ class AppButtonBack extends StatelessWidget {
     super.key,
     required this.onPressed,
     this.backgroundColor,
+    this.isLabel = true,
   });
   final VoidCallback onPressed;
   final Color? backgroundColor;
+  final bool isLabel;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: const [
-          BoxShadow(
-            color: AppColor.shadowColor,
-            offset: Offset(0, 0),
-            blurRadius: 12,
-            spreadRadius: 1,
-          ),
-        ],
-        borderRadius: BorderRadius.circular(45.r),
-      ),
-      child: ElevatedButton.icon(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor ?? AppColor.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(45.r),
-          ),
-          padding: REdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          elevation: 0,
+    return InkWell(
+      onTap: onPressed,
+      borderRadius: BorderRadius.circular(45.r),
+      splashColor: AppColor.primaryLightHover,
+      radius: 100.r,
+      hoverColor: AppColor.primaryLightHover,
+      child: Ink(
+        padding: REdgeInsets.symmetric(vertical: 8, horizontal: 8),
+        decoration: BoxDecoration(
+          color: backgroundColor ?? AppColor.white,
+          boxShadow: const [
+            BoxShadow(
+              color: AppColor.shadowColor,
+              offset: Offset(0, 0),
+              blurRadius: 12,
+              spreadRadius: 1,
+            ),
+          ],
+          borderRadius: BorderRadius.circular(45.r),
         ),
-        label: Text('عوده', style: AppTextStyles.s14.w400.black),
-        icon: SvgPicture.asset(AppIcons.arrowBack),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(AppIcons.arrowBack),
+            Visibility(
+              visible: isLabel,
+              child: Padding(
+                padding: REdgeInsets.symmetric(horizontal: 8),
+                child: Text('عوده', style: AppTextStyles.s14.w400.black),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

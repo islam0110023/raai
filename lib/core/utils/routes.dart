@@ -1,15 +1,29 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:raai/core/utils/service_locator.dart';
+import 'package:raai/feature/add_reads/presentation/manager/add_read/add_reading_cubit.dart';
+import 'package:raai/feature/add_reads/presentation/manager/add_reads_cubit.dart';
+import 'package:raai/feature/add_reads/presentation/view/add_reads_screen.dart';
+import 'package:raai/feature/auth/presentation/manager/login/login_cubit.dart';
+import 'package:raai/feature/auth/presentation/manager/new_password/new_password_cubit.dart';
+import 'package:raai/feature/auth/presentation/manager/otp_register/otp_register_cubit.dart';
+import 'package:raai/feature/auth/presentation/manager/register/register_cubit.dart';
+import 'package:raai/feature/auth/presentation/manager/reset/reset_cubit.dart';
+import 'package:raai/feature/auth/presentation/manager/select_role/select_role_cubit.dart';
 import 'package:raai/feature/auth/presentation/view/forget_password_screen.dart';
 import 'package:raai/feature/auth/presentation/view/login_screen.dart';
 import 'package:raai/feature/auth/presentation/view/register_screen.dart';
 import 'package:raai/feature/auth/presentation/view/reset_password_screen.dart';
 import 'package:raai/feature/auth/presentation/view/select_role_screen.dart';
 import 'package:raai/feature/auth/presentation/view/verify_o_t_p_screen.dart';
+import 'package:raai/feature/bottom_nav/presentation/manager/bottom_nav_cubit.dart';
+import 'package:raai/feature/bottom_nav/presentation/view/home_screen.dart';
+import 'package:raai/feature/chat_bot/presentation/manager/chat_bot_cubit.dart';
 import 'package:raai/feature/medical_information/presentation/manager/medical_info_cubit.dart';
 import 'package:raai/feature/medical_information/presentation/view/confirmation_screen.dart';
 import 'package:raai/feature/medical_information/presentation/view/medical_information_screen.dart';
 import 'package:raai/feature/onboarding/presentation/view/on_boarding_screen.dart';
+import 'package:raai/feature/personal_info/presentation/manager/personal_cubit.dart';
 import 'package:raai/feature/personal_info/presentation/view/personal_info_screen.dart';
 import 'package:raai/feature/splash/presentation/view/splash_screen.dart';
 import 'package:raai/main.dart';
@@ -28,6 +42,8 @@ class AppRoutes {
   static const personalInfo = '/personal-info';
   static const medicalInfo = '/medical-info';
   static const confirmationScreen = '/confirmation-screen';
+  static const homeScreen = '/home-screen';
+  static const addReads = '/add-reads';
 
   static final route = GoRouter(
     navigatorKey: navigatorKey,
@@ -41,41 +57,93 @@ class AppRoutes {
         path: onBoarding,
         builder: (context, state) => const OnBoardingScreen(),
       ),
-      GoRoute(path: login, builder: (context, state) => const LoginScreen()),
+      GoRoute(
+        path: login,
+        builder: (context, state) => BlocProvider(
+          create: (context) => LoginCubit(getIt()),
+          child: const LoginScreen(),
+        ),
+      ),
       GoRoute(
         path: register,
-        builder: (context, state) => const RegisterScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => RegisterCubit(getIt()),
+          child: const RegisterScreen(),
+        ),
       ),
       GoRoute(
         path: verifyOTP,
-        builder: (context, state) => const VerifyOTPScreen(),
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>;
+          final email = extra['email'];
+          return BlocProvider(
+            create: (context) => OtpRegisterCubit(getIt(), email, getIt()),
+            child: const VerifyOTPScreen(),
+          );
+        },
       ),
       GoRoute(
         path: selectRole,
-        builder: (context, state) => const SelectRoleScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => SelectRoleCubit(getIt()),
+          child: const SelectRoleScreen(),
+        ),
       ),
       GoRoute(
         path: forgetScreen,
-        builder: (context, state) => const ForgetPasswordScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => ResetCubit(getIt()),
+          child: const ForgetPasswordScreen(),
+        ),
       ),
       GoRoute(
         path: resetPassword,
-        builder: (context, state) => const ResetPasswordScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => NewPasswordCubit(getIt()),
+          child: const ResetPasswordScreen(),
+        ),
       ),
       GoRoute(
         path: personalInfo,
-        builder: (context, state) => const PersonalInfoScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => PersonalCubit(getIt()),
+          child: const PersonalInfoScreen(),
+        ),
       ),
       GoRoute(
         path: medicalInfo,
         builder: (context, state) => BlocProvider(
-          create: (context) => MedicalInfoCubit(),
+          create: (context) => MedicalInfoCubit(getIt()),
           child: const MedicalInformationScreen(),
         ),
       ),
       GoRoute(
         path: confirmationScreen,
         builder: (context, state) => const ConfirmationScreen(),
+      ),
+      GoRoute(
+        path: homeScreen,
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => BottomNavCubit()),
+            BlocProvider(create: (context) => ChatBotCubit(getIt())),
+          ],
+          child: const HomeScreen(),
+        ),
+      ),
+      GoRoute(
+        path: addReads,
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => AddReadingCubit(getIt(), getIt()),
+            ),
+            BlocProvider(
+              create: (context) => AddReadsCubit(state.extra as bool),
+            ),
+          ],
+          child: const AddReadsScreen(),
+        ),
       ),
     ],
   );

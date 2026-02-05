@@ -66,7 +66,7 @@ class PasswordTextField extends StatelessWidget {
                     validator ??
                     (value) {
                       if (value == null || value.isEmpty) {
-                        return 'This field is required';
+                        return 'يجب ادخال كلمة المرور';
                       }
                       return null;
                     },
@@ -77,6 +77,7 @@ class PasswordTextField extends StatelessWidget {
                   hintText: hint,
                   filled: true,
                   fillColor: Colors.white,
+                  errorStyle: AppTextStyles.s14.w400.redNormal,
                   hintStyle: AppTextStyles.s14.w400.subTextNormal,
                   helperText: helperText,
                   contentPadding: REdgeInsets.symmetric(

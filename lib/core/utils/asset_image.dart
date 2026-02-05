@@ -7,4 +7,7 @@ class AppImage {
   static const imageAuth = 'assets/images/image_auth.png';
   static const father = 'assets/images/father.png';
   static const son = 'assets/images/son.png';
+  static const pen1 = 'assets/images/pen 1.png';
+  static const loading = 'assets/lotties/loading.json';
+  static const chatLoading = 'assets/lotties/chat_loading.json';
 }

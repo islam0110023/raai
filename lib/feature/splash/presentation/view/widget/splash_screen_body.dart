@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:raai/core/db/cache_helper/cache_helper.dart';
 import 'package:raai/core/utils/app_color.dart';
 import 'package:raai/core/utils/asset_image.dart';
 import 'package:raai/core/utils/constants.dart';
@@ -59,15 +60,29 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
     controller.forward();
     controller.addStatusListener((status) {
       if (status.isCompleted) {
-        context.go(AppRoutes.onBoarding);
+        navigateToNextScreen();
       }
     });
   }
 
+  void navigateToNextScreen() async {
+    final isLoggedIn =
+        await CacheHelper.getData(key: AppConstant.cacheKeyIsLoggedIn) ?? false;
+
+    if (!mounted) return;
+
+    if (isLoggedIn == true) {
+      context.go(AppRoutes.homeScreen);
+    } else {
+      context.go(AppRoutes.onBoarding);
+    }
+  }
+
   @override
   void dispose() {
-    super.dispose();
     controller.dispose();
+
+    super.dispose();
   }
 
   @override

@@ -13,6 +13,7 @@ abstract class AppColor {
   static const Color primaryDarkHover = Color(0xFF2C5688);
   static const Color primaryDarkActive = Color(0xFF214166);
   static const Color primaryDarker = Color(0xFF1A324F);
+  static const Color blue = Color(0xFF3369ff);
 
   // --- Secondary Palette (Lime Green) ---
   static const Color secondaryLight = Color(0xFFF2FBE9);
@@ -25,6 +26,7 @@ abstract class AppColor {
   static const Color secondaryDarkHover = Color(0xFF4C7F14);
   static const Color secondaryDarkActive = Color(0xFF395F0F);
   static const Color secondaryDarker = Color(0xFF2C4A0C);
+  static const Color green = Color(0xFF3abf38);
 
   // --- Text Palette (Grayscale) ---
   static const Color textLight = Color(0xFFEBEBEB);
@@ -87,6 +89,7 @@ abstract class AppColor {
   static const Color redDarker = Color(0xFF490109);
   static const Color shadowColor = Color(0x19000000);
   static const Color borderColor = Color(0xffBEBDB9);
+  static const Color orange = Color(0xffd3d552);
 
   static const Color white = Colors.white;
   static const Color black = Colors.black;

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheHelper {
@@ -23,6 +25,10 @@ class CacheHelper {
   }
 
   static Future<bool> removeData({required String key}) async {
-    return await sharedPreferences!.remove(key);
+    final isRemoved = await sharedPreferences!.remove(key);
+    if (isRemoved) {
+      log('removed $key');
+    }
+    return isRemoved;
   }
 }

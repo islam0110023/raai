@@ -23,9 +23,10 @@ class _CustomConfirmUpperAnimationState
       vsync: this,
       duration: const Duration(milliseconds: 600),
     );
-    animation=CurvedAnimation(parent: controller, curve: Curves.bounceInOut);
+    animation = CurvedAnimation(parent: controller, curve: Curves.bounceInOut);
     controller.forward();
   }
+
   @override
   void dispose() {
     // TODO: implement dispose

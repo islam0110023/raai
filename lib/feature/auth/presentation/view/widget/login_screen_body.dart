@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:raai/core/utils/app_color.dart';
@@ -9,16 +8,17 @@ import 'package:raai/core/utils/app_icons.dart';
 import 'package:raai/core/utils/routes.dart';
 import 'package:raai/core/utils/styling.dart';
 import 'package:raai/core/widget/app_button.dart';
-import 'package:raai/core/widget/app_text_field.dart';
-import 'package:raai/core/widget/password_text_field.dart';
+import 'package:raai/feature/auth/presentation/manager/login/login_cubit.dart';
 import 'package:raai/feature/auth/presentation/view/widget/custom_auth_with_social.dart';
 import 'package:raai/feature/auth/presentation/view/widget/custom_background_auth.dart';
+import 'package:raai/feature/auth/presentation/view/widget/custom_fields_login.dart';
 
 class LoginScreenBody extends StatelessWidget {
   const LoginScreenBody({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = context.read<LoginCubit>();
     return CustomBackgroundAuth(
       children: [
         Text('اهلا بعودتك', style: AppTextStyles.s24.w700.black),
@@ -60,24 +60,7 @@ class LoginScreenBody extends StatelessWidget {
           ],
         ),
         const RSizedBox(height: 16),
-        AppTextField(
-          hint: 'ادخل رقم الهاتف',
-          prefixIcon: CupertinoIcons.phone,
-          keyboardType: TextInputType.phone,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-            LengthLimitingTextInputFormatter(11),
-          ],
-          isRequired: true,
-          label: 'رقم الهاتف',
-        ),
-        const RSizedBox(height: 16),
-        const PasswordTextField(
-          hint: 'ادخل كلمه المرور الخاصه بك',
-          isRequired: true,
-          label: 'كلمه المرور',
-          helperText: 'يجب ان تكون 8 حروف او ارقام علي الاقل',
-        ),
+        const CustomFieldsLogin(),
         TextButton(
           onPressed: () {
             context.push(AppRoutes.forgetScreen);
@@ -92,7 +75,12 @@ class LoginScreenBody extends StatelessWidget {
           ),
         ),
         const RSizedBox(height: 20),
-        AppButton.filled(text: 'تسجيل الدخول', onPressed: () {}),
+        AppButton.filled(
+          text: 'تسجيل الدخول',
+          onPressed: () {
+            controller.login();
+          },
+        ),
         const RSizedBox(height: 16),
         Align(
           alignment: Alignment.center,
