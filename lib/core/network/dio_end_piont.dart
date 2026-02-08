@@ -24,5 +24,10 @@ class Endpoints {
     '/api/api/v1/auth/blood-pressure-readings',
   );
   static String updateSugar = merge('/api/api/v1/auth/sugar-readings/');
-  static String updateBlood = merge('/api/api/v1/auth/blood-pressure-readings/');
+  static String updateBlood = merge(
+    '/api/api/v1/auth/blood-pressure-readings/',
+  );
+  static String getSugarMonthly = merge('/api/api/v1/ai/diabetes-month');
+  static String getSugarDaily = merge('/api/api/v1/ai/diabetes-daily');
+  static String getUserProfile = merge('/api/api/v1/users/profile');
 }

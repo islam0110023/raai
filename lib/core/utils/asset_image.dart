@@ -10,4 +10,9 @@ class AppImage {
   static const pen1 = 'assets/images/pen 1.png';
   static const loading = 'assets/lotties/loading.json';
   static const chatLoading = 'assets/lotties/chat_loading.json';
+  static const clockLottie = 'assets/lotties/clock.json';
+  static const avatarFemale = 'assets/images/Rectangle 6.png';
+  static const avatarMale = 'assets/images/male.png';
+  static const soon = 'assets/images/soon.png';
+  static const error1 = 'assets/images/error 1.png';
 }

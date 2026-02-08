@@ -24,6 +24,8 @@ class BloodCubit extends Cubit<BloodState> {
     diastolicController = TextEditingController();
   }
 
+  DateTime? recordedAt;
+
   void getBloodReads() async {
     emit(ReadBloodLoading());
     final data = await getBloodReadsUseCase();
@@ -36,6 +38,7 @@ class BloodCubit extends Cubit<BloodState> {
         if (data.isEmpty) {
           emit(ReadBloodNoData());
         } else {
+          recordedAt = data[0].recordedAtDate;
           emit(ReadBloodSuccess(data));
         }
       },

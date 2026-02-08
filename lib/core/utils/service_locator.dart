@@ -26,10 +26,19 @@ import 'package:raai/feature/medical_information/data/data_source/medical_remote
 import 'package:raai/feature/medical_information/data/repo/medical_repo_impl.dart';
 import 'package:raai/feature/medical_information/domain/repo/medical_repo.dart';
 import 'package:raai/feature/medical_information/domain/use_case/set_medical_use_case.dart';
+import 'package:raai/feature/models/data/data_source/model_remote_data_source.dart';
+import 'package:raai/feature/models/data/repo/model_repo_impl.dart';
+import 'package:raai/feature/models/domain/repo/model_repo.dart';
+import 'package:raai/feature/models/domain/use_case/get_sugar_daily_use_case.dart';
+import 'package:raai/feature/models/domain/use_case/get_sugar_monthly_use_case.dart';
 import 'package:raai/feature/personal_info/data/data_source/personal_remote_data_source.dart';
 import 'package:raai/feature/personal_info/data/repo/personal_repo_impl.dart';
 import 'package:raai/feature/personal_info/domain/repo/personal_repo.dart';
 import 'package:raai/feature/personal_info/domain/use_case/set_personal_info_use_case.dart';
+import 'package:raai/feature/profile/data/data_source/profile_remote_data_source.dart';
+import 'package:raai/feature/profile/data/repo/profile_repo_impl.dart';
+import 'package:raai/feature/profile/domain/repo/profile_repo.dart';
+import 'package:raai/feature/profile/domain/use_case/get_user_profile_use_case.dart';
 import 'package:raai/feature/reads/data/data_source/read_remote_data_source.dart';
 import 'package:raai/feature/reads/data/repo/read_repo_impl.dart';
 import 'package:raai/feature/reads/domain/repo/read_repo.dart';
@@ -64,6 +73,13 @@ void setUpServices() {
   getIt.registerLazySingleton<ReadRemoteDataSource>(
     () => ReadRemoteDataSourceImpl(),
   );
+  getIt.registerLazySingleton<ModelRemoteDataSource>(
+    () => ModelRemoteDataSourceImpl(),
+  );
+  getIt.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(),
+  );
+
   //Repo
   getIt.registerLazySingleton<ChatBotRepo>(() => ChatBotRepoImpl(getIt()));
 
@@ -72,6 +88,8 @@ void setUpServices() {
   getIt.registerLazySingleton<MedicalRepo>(() => MedicalRepoImpl(getIt()));
   getIt.registerLazySingleton<AddReadRepo>(() => AddReadRepoImpl(getIt()));
   getIt.registerLazySingleton<ReadRepo>(() => ReadRepoImpl(getIt()));
+  getIt.registerLazySingleton<ModelRepo>(() => ModelRepoImpl(getIt()));
+  getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepoImpl(getIt()));
 
   //UseCase
   getIt.registerLazySingleton<GetMessagesUseCase>(
@@ -115,5 +133,14 @@ void setUpServices() {
   );
   getIt.registerLazySingleton<UpdateBloodUseCase>(
     () => UpdateBloodUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<GetSugarMonthlyUseCase>(
+    () => GetSugarMonthlyUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<GetSugarDailyUseCase>(
+    () => GetSugarDailyUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<GetUserProfileUseCase>(
+    () => GetUserProfileUseCase(getIt()),
   );
 }

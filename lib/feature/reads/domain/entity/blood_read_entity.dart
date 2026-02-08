@@ -12,6 +12,7 @@ class BloodReadEntity {
     required this.isEditable,
     required this.statusCode,
     required this.trafficColor,
+    required this.recordedAtDate,
   });
 
   final int id;
@@ -20,6 +21,7 @@ class BloodReadEntity {
   final int dia;
   final String status;
   final String recordedAt;
+  final DateTime recordedAtDate;
   final int userId;
   final bool isEditable;
   final int statusCode;

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:raai/core/failure/api_failure.dart';
+import 'package:raai/core/failure/dio_error_mapper.dart';
 import 'package:raai/core/model/api_response.dart';
 import 'package:raai/feature/auth/data/data_source/auth_remote_data_source.dart';
 import 'package:raai/feature/auth/domain/entity/login_entity.dart';
@@ -34,7 +35,7 @@ class AuthRepoImpl extends AuthRepo {
         return left(ServerFailure(response.appCode));
       }
 
-      return left(ServerFailure(999));
+      return left(DioErrorMapper.map(e));
     } catch (e) {
       return left(ServerFailure(null));
     }
@@ -56,7 +57,7 @@ class AuthRepoImpl extends AuthRepo {
         return left(ServerFailure(response.appCode));
       }
 
-      return left(ServerFailure(999));
+      return left(DioErrorMapper.map(e));
     } catch (e) {
       return left(ServerFailure(null));
     }
@@ -79,7 +80,7 @@ class AuthRepoImpl extends AuthRepo {
         return left(ServerFailure(response.appCode));
       }
 
-      return left(ServerFailure(999));
+      return left(DioErrorMapper.map(e));
     } catch (e) {
       return left(ServerFailure(null));
     }
@@ -104,7 +105,7 @@ class AuthRepoImpl extends AuthRepo {
         return left(ServerFailure(response.appCode));
       }
 
-      return left(ServerFailure(999));
+      return left(DioErrorMapper.map(e));
     } catch (e) {
       return left(ServerFailure(null));
     }
@@ -125,7 +126,7 @@ class AuthRepoImpl extends AuthRepo {
         return left(ServerFailure(response.appCode));
       }
 
-      return left(ServerFailure(999));
+      return left(DioErrorMapper.map(e));
     } catch (e) {
       return left(ServerFailure(null));
     }
@@ -150,7 +151,7 @@ class AuthRepoImpl extends AuthRepo {
         return left(ServerFailure(response.appCode));
       }
 
-      return left(ServerFailure(999));
+      return left(DioErrorMapper.map(e));
     } catch (e) {
       return left(ServerFailure(null));
     }
@@ -175,7 +176,7 @@ class AuthRepoImpl extends AuthRepo {
         return left(ServerFailure(response.appCode));
       }
 
-      return left(ServerFailure(999));
+      return left(DioErrorMapper.map(e));
     } catch (e) {
       return left(ServerFailure(null));
     }
@@ -195,8 +196,7 @@ class AuthRepoImpl extends AuthRepo {
         final response = ApiResponse.fromJson(data);
         return left(ServerFailure(response.appCode));
       }
-
-      return left(ServerFailure(999));
+      return left(DioErrorMapper.map(e));
     } catch (e) {
       return left(ServerFailure(null));
     }

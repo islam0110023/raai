@@ -102,6 +102,14 @@ class CustomFieldsLogin extends StatelessWidget {
                     );
                     context.go(AppRoutes.homeScreen);
                   }
+                  if (state.entity.appCode == 452) {
+                    showAnimatedTopSnackBar(
+                      context,
+                      message: 'انطلق',
+                      subMessage: message,
+                    );
+                    context.go(AppRoutes.camingSoon);
+                  }
                 });
               }
               if (state is LoginLoading) {

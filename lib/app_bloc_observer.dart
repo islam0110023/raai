@@ -10,6 +10,18 @@ class AppBlocObserver extends BlocObserver {
   }
 
   @override
+  void onDone(
+    Bloc bloc,
+    Object? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) {
+    // TODO: implement onDone
+    super.onDone(bloc, event, error, stackTrace);
+    _log('✅ DONE', bloc, details: 'Event: $event');
+  }
+
+  @override
   void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
     _log('🟢 EVENT', bloc, details: event.toString());

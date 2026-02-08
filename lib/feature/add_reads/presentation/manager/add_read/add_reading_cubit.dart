@@ -12,6 +12,7 @@ class AddReadingCubit extends Cubit<AddReadingState> {
     : super(AddReadingInitial()) {
     init();
   }
+  bool isSend = false;
   final AddSugarUseCase addSugarUseCase;
   final AddBloodUseCase addBloodUseCase;
 
@@ -36,6 +37,7 @@ class AddReadingCubit extends Cubit<AddReadingState> {
         },
         (success) {
           sugarController.clear();
+          isSend = true;
           emit(AddReadingSugarSuccess());
         },
       );
@@ -60,6 +62,8 @@ class AddReadingCubit extends Cubit<AddReadingState> {
         (success) {
           systolicController.clear();
           diastolicController.clear();
+          isSend = true;
+
           emit(AddReadingBloodSuccess());
         },
       );

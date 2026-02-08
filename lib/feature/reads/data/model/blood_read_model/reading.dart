@@ -73,6 +73,7 @@ class Reading {
       isEditable: isEditable ?? false,
       statusCode: statusCode!,
       trafficColor: status!.bloodPressureTrafficColor,
+      recordedAtDate: recordedAt!,
     );
   }
 }

@@ -22,6 +22,7 @@ class AuthCubit extends Cubit<AuthState> {
     tokenManager.clear();
     await SecureStorage.clear();
     await CacheHelper.removeData(key: AppConstant.cacheKeyIsLoggedIn);
+    await CacheHelper.removeData(key: AppConstant.cacheKeyCaregiverIsLoggedIn);
     emit(AuthUnauthenticated());
   }
 
@@ -30,6 +31,7 @@ class AuthCubit extends Cubit<AuthState> {
     tokenManager.clear();
     await SecureStorage.clear();
     await CacheHelper.removeData(key: AppConstant.cacheKeyIsLoggedIn);
+    await CacheHelper.removeData(key: AppConstant.cacheKeyCaregiverIsLoggedIn);
     emit(AuthUnauthenticated());
   }
 }

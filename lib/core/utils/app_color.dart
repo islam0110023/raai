@@ -90,6 +90,10 @@ abstract class AppColor {
   static const Color shadowColor = Color(0x19000000);
   static const Color borderColor = Color(0xffBEBDB9);
   static const Color orange = Color(0xffd3d552);
+  static const Color yellowLight = Color(0xffFCEDC1);
+  static const Color yellowNormalActive = Color(0xffF6D059);
+  static const Color orangeLight = Color(0xffFBE1B8);
+  static const Color orangeNormalActive = Color(0xffF39C12);
 
   static const Color white = Colors.white;
   static const Color black = Colors.black;

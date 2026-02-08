@@ -11,7 +11,7 @@ class CustomTabBarReads extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: REdgeInsets.only(right: 16.r),
+      padding: REdgeInsets.only(right: 4.r),
       child: RSizedBox(
         width: 160,
         child: TabBar(

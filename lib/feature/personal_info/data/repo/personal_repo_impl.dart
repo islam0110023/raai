@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:raai/core/failure/api_failure.dart';
+import 'package:raai/core/failure/dio_error_mapper.dart';
 import 'package:raai/core/model/api_response.dart';
 import 'package:raai/feature/personal_info/data/data_source/personal_remote_data_source.dart';
 import 'package:raai/feature/personal_info/domain/repo/personal_repo.dart';
@@ -32,7 +33,7 @@ class PersonalRepoImpl extends PersonalRepo {
         return left(ServerFailure(response.appCode));
       }
 
-      return left(ServerFailure(999));
+      return left(DioErrorMapper.map(e));
     } catch (e) {
       return left(ServerFailure(null));
     }

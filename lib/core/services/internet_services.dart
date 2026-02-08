@@ -1,6 +1,5 @@
 import 'dart:async';
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
 class InternetService {
   InternetService() {
@@ -11,26 +10,17 @@ class InternetService {
 
   bool get isConnected => _isConnected;
   Stream<bool> get onStatusChanged => _controller.stream;
+  final InternetConnection _internetConnection = InternetConnection();
 
-  void _init() async {
-    _checkInitialConnection();
-    Connectivity().onConnectivityChanged.listen((_) => _checkConnection());
+  void _init() {
+    _startMonitoring();
   }
 
-  Future<void> _checkInitialConnection() async {
-    final result = await Connectivity().checkConnectivity();
-    if (result == ConnectivityResult.none) {
-      _setConnection(false);
-    } else {
-      final hasInternet =
-          await InternetConnectionChecker.instance.hasConnection;
+  void _startMonitoring() {
+    _internetConnection.onStatusChange.listen((event) {
+      final hasInternet = event == InternetStatus.connected;
       _setConnection(hasInternet);
-    }
-  }
-
-  void _checkConnection() async {
-    final hasInternet = await InternetConnectionChecker.instance.hasConnection;
-    _setConnection(hasInternet);
+    });
   }
 
   void _setConnection(bool status) {

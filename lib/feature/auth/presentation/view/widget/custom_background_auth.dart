@@ -41,6 +41,8 @@ class CustomBackgroundAuth extends StatelessWidget {
                 context.pop();
               },
               backgroundColor: AppColor.white.withAlpha(150),
+              isLabel: true,
+              isAuth: true,
             ),
           ),
         Positioned(

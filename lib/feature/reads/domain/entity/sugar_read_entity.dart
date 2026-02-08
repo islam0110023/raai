@@ -10,6 +10,7 @@ class SugarReadEntity {
     required this.userId,
     required this.isEditable,
     required this.trafficColor,
+    required this.recordedAtDate,
   });
 
   final int id;
@@ -17,6 +18,7 @@ class SugarReadEntity {
   final int valueMgDl;
   final String status;
   final String recordedAt;
+  final DateTime recordedAtDate;
   final int userId;
   final bool isEditable;
   final Color trafficColor;

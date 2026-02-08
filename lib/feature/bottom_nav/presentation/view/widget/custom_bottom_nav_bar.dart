@@ -18,7 +18,7 @@ class CustomBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 56.h,
-      margin: REdgeInsets.symmetric(vertical: 8, horizontal: 26),
+      margin: REdgeInsets.symmetric(vertical: 48, horizontal: 26),
       padding: REdgeInsets.symmetric(vertical: 8, horizontal: 16),
       decoration: BoxDecoration(
         color: AppColor.disableLightHover,

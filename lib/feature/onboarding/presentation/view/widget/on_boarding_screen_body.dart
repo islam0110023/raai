@@ -73,7 +73,7 @@ class _OnBoardingScreenBodyState extends State<OnBoardingScreenBody> {
               });
             },
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: 35.h),
         ],
       ),
     );

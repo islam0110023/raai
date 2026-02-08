@@ -79,9 +79,9 @@ class AppRoot extends StatelessWidget {
         builder: (context, child) {
           return BlocListener<AuthCubit, AuthState>(
             listener: (context, state) {
-              if (navigatorKey.currentState == null) return;
-
               final ctx = navigatorKey.currentState!.overlay!.context;
+
+              if (navigatorKey.currentState == null) return;
 
               if (state is AuthUnauthenticated) {
                 if (Navigator.of(ctx, rootNavigator: true).canPop()) {
@@ -95,7 +95,7 @@ class AppRoot extends StatelessWidget {
                 AppConstant.showLoadingDialog(ctx);
               }
             },
-            child: Scaffold(body: child!),
+            child: child!,
           );
         },
       ),

@@ -71,7 +71,7 @@ class RegisterScreenBody extends StatelessWidget {
             ),
           ),
         ),
-        const RSizedBox(height: 24),
+        const RSizedBox(height: 35),
       ],
     );
   }

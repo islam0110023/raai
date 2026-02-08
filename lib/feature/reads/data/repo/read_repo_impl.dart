@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:raai/core/failure/api_failure.dart';
+import 'package:raai/core/failure/dio_error_mapper.dart';
 import 'package:raai/core/model/api_response.dart';
 import 'package:raai/feature/reads/data/data_source/read_remote_data_source.dart';
 import 'package:raai/feature/reads/domain/entity/blood_read_entity.dart';
@@ -22,7 +23,7 @@ class ReadRepoImpl extends ReadRepo {
         final response = ApiResponse.fromJson(data);
         return left(ServerFailure(response.appCode));
       }
-      return left(ServerFailure(999));
+      return left(DioErrorMapper.map(e));
     } catch (e) {
       return left(ServerFailure(null));
     }
@@ -41,7 +42,7 @@ class ReadRepoImpl extends ReadRepo {
 
         return left(ServerFailure(response.appCode));
       }
-      return left(ServerFailure(999));
+      return left(DioErrorMapper.map(e));
     } catch (e) {
       return left(ServerFailure(null));
     }
@@ -63,7 +64,7 @@ class ReadRepoImpl extends ReadRepo {
 
         return left(ServerFailure(response.appCode));
       }
-      return left(ServerFailure(999));
+      return left(DioErrorMapper.map(e));
     } catch (e) {
       return left(ServerFailure(null));
     }
@@ -90,7 +91,7 @@ class ReadRepoImpl extends ReadRepo {
 
         return left(ServerFailure(response.appCode));
       }
-      return left(ServerFailure(999));
+      return left(DioErrorMapper.map(e));
     } catch (e) {
       return left(ServerFailure(null));
     }

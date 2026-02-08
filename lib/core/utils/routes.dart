@@ -17,11 +17,17 @@ import 'package:raai/feature/auth/presentation/view/reset_password_screen.dart';
 import 'package:raai/feature/auth/presentation/view/select_role_screen.dart';
 import 'package:raai/feature/auth/presentation/view/verify_o_t_p_screen.dart';
 import 'package:raai/feature/bottom_nav/presentation/manager/bottom_nav_cubit.dart';
+import 'package:raai/feature/bottom_nav/presentation/view/coming_soon.dart';
 import 'package:raai/feature/bottom_nav/presentation/view/home_screen.dart';
 import 'package:raai/feature/chat_bot/presentation/manager/chat_bot_cubit.dart';
 import 'package:raai/feature/medical_information/presentation/manager/medical_info_cubit.dart';
 import 'package:raai/feature/medical_information/presentation/view/confirmation_screen.dart';
 import 'package:raai/feature/medical_information/presentation/view/medical_information_screen.dart';
+import 'package:raai/feature/models/presentation/manager/sugar_daily/sugar_daily_cubit.dart';
+import 'package:raai/feature/models/presentation/manager/sugar_monthly/sugar_monthly_cubit.dart';
+import 'package:raai/feature/models/presentation/view/select_models_screen.dart';
+import 'package:raai/feature/models/presentation/view/sugar_daily_model_screen.dart';
+import 'package:raai/feature/models/presentation/view/sugar_monthly_model_screen.dart';
 import 'package:raai/feature/onboarding/presentation/view/on_boarding_screen.dart';
 import 'package:raai/feature/personal_info/presentation/manager/personal_cubit.dart';
 import 'package:raai/feature/personal_info/presentation/view/personal_info_screen.dart';
@@ -44,6 +50,10 @@ class AppRoutes {
   static const confirmationScreen = '/confirmation-screen';
   static const homeScreen = '/home-screen';
   static const addReads = '/add-reads';
+  static const selectModels = '/select-models';
+  static const sugarMonthlyModel = '/sugar-monthly-model';
+  static const sugarDailyModel = '/sugar-daily-model';
+  static const camingSoon = '/coming-soon';
 
   static final route = GoRouter(
     navigatorKey: navigatorKey,
@@ -144,6 +154,28 @@ class AppRoutes {
           ],
           child: const AddReadsScreen(),
         ),
+      ),
+      GoRoute(
+        path: selectModels,
+        builder: (context, state) => const SelectModelsScreen(),
+      ),
+      GoRoute(
+        path: sugarMonthlyModel,
+        builder: (context, state) => BlocProvider(
+          create: (context) => SugarMonthlyCubit(getIt()),
+          child: const SugarMonthlyModelScreen(),
+        ),
+      ),
+      GoRoute(
+        path: sugarDailyModel,
+        builder: (context, state) => BlocProvider(
+          create: (context) => SugarDailyCubit(getIt()),
+          child: const SugarDailyModelScreen(),
+        ),
+      ),
+      GoRoute(
+        path: camingSoon,
+        builder: (context, state) => const ComingSoon(),
       ),
     ],
   );

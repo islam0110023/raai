@@ -30,14 +30,10 @@ class RefreshInterceptor extends Interceptor {
 
     final refreshToken = await SecureStorage.getUserToken();
     if (refreshToken == null) {
+      forceLogout();
       return handler.next(err);
     }
     if (err.response?.statusCode == 403 || err.response?.statusCode == 401) {
-      final refreshToken = await SecureStorage.getUserToken();
-      if (refreshToken == null) {
-        forceLogout();
-        return;
-      }
       if (isRefreshing) {
         retryQueue.add(() async {
           handler.resolve(await retry(err.requestOptions));
@@ -54,8 +50,9 @@ class RefreshInterceptor extends Interceptor {
           (failure) {
             throw failure;
           },
-          (entity) {
+          (entity) async {
             tokenManager.saveAccessToken(entity.accessToken);
+            await SecureStorage.saveUserToken(token: entity.refreshToken);
           },
         );
         for (final retry in retryQueue) {

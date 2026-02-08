@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:raai/core/utils/app_color.dart';
 
+enum HealthLevel { green, orange, red, none }
+
 extension SugarStatusArabic on String {
   String get toArabicSugarStatus {
     switch (this) {
       case 'VERY_LOW':
-        return 'خطر جدًا';
+        return 'منخفض جدًا';
       case 'LOW':
         return 'يحتاج متابعة';
       case 'NORMAL':
@@ -13,7 +15,7 @@ extension SugarStatusArabic on String {
       case 'HIGH':
         return 'يحتاج متابعة';
       case 'VERY_HIGH':
-        return 'خطر جدًا';
+        return 'مرتفع جدًا';
       default:
         return 'غير معروف';
     }
@@ -34,6 +36,24 @@ extension SugarStatusArabic on String {
 
       default:
         return AppColor.orange;
+    }
+  }
+
+  HealthLevel get level {
+    switch (this) {
+      case 'VERY_LOW':
+      case 'VERY_HIGH':
+        return HealthLevel.red;
+
+      case 'LOW':
+      case 'HIGH':
+        return HealthLevel.orange;
+
+      case 'NORMAL':
+        return HealthLevel.green;
+
+      default:
+        return HealthLevel.orange;
     }
   }
 }

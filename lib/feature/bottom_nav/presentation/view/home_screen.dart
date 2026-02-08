@@ -16,29 +16,26 @@ class HomeScreen extends StatelessWidget {
     final controller = context.read<BottomNavCubit>();
     final state = context.watch<BottomNavCubit>();
 
-    return SafeArea(
-      right: false,
-      left: false,
-      top: false,
-      child: Scaffold(
-        extendBody: true,
-        resizeToAvoidBottomInset: true,
+    return Scaffold(
+      extendBody: true,
+      resizeToAvoidBottomInset: true,
 
-        body: IndexedStack(
-          index: state.currentIndex,
-          children: [
-            const ComingSoonBody(),
-            state.isSelected[1] ? const ComingSoonBody() : const SizedBox(),
-            state.isSelected[2] ? const ChatBotView() : const SizedBox(),
-            state.isSelected[3] ? const ReadsView() : const SizedBox(),
-            state.isSelected[4] ? const ProfileView() : const SizedBox(),
-          ],
-        ),
-        bottomNavigationBar: Visibility(
-          visible: !controller.isChat,
-          replacement: const CustomChatBotSender(),
-          child: CustomBottomNavBar(controller: controller, state: state),
-        ),
+      body: IndexedStack(
+        index: state.currentIndex,
+        children: [
+          const ComingSoonBody(isCaregiver: false),
+          state.isSelected[1]
+              ? const ComingSoonBody(isCaregiver: false)
+              : const SizedBox(),
+          state.isSelected[2] ? const ChatBotView() : const SizedBox(),
+          state.isSelected[3] ? const ReadsView() : const SizedBox(),
+          state.isSelected[4] ? const ProfileView() : const SizedBox(),
+        ],
+      ),
+      bottomNavigationBar: Visibility(
+        visible: !controller.isChat,
+        replacement: const CustomChatBotSender(),
+        child: CustomBottomNavBar(controller: controller, state: state),
       ),
     );
   }

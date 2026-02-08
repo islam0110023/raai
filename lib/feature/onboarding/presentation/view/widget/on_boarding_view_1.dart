@@ -36,20 +36,32 @@ class OnBoardingView1 extends StatelessWidget {
               child: Container(
                 padding: REdgeInsets.symmetric(horizontal: 64, vertical: 16),
                 decoration: BoxDecoration(
-                  color: AppColor.primaryNormal,
+                  color: AppColor.primaryLight,
                   borderRadius: BorderRadius.circular(45.r),
                 ),
-                child: SvgPicture.asset(AppIcons.voiceSound),
+                child: SvgPicture.asset(
+                  AppIcons.voiceSound,
+                  colorFilter: const ColorFilter.mode(
+                    AppColor.primaryNormal,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
             ),
             Expanded(
               child: Container(
                 padding: REdgeInsets.symmetric(horizontal: 64, vertical: 16),
                 decoration: BoxDecoration(
-                  color: AppColor.primaryNormal,
+                  color: AppColor.primaryLight,
                   borderRadius: BorderRadius.circular(45.r),
                 ),
-                child: SvgPicture.asset(AppIcons.fingerScan),
+                child: SvgPicture.asset(
+                  AppIcons.fingerScan,
+                  colorFilter: const ColorFilter.mode(
+                    AppColor.primaryNormal,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
             ),
           ],

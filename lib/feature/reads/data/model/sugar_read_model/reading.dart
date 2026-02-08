@@ -63,6 +63,7 @@ class Reading {
       userId: userId!,
       isEditable: isEditable ?? false,
       trafficColor: status!.trafficColor,
+      recordedAtDate: recordedAt!,
     );
   }
 }

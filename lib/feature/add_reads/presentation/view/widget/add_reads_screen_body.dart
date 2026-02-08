@@ -7,8 +7,8 @@ import 'package:raai/core/utils/app_color.dart';
 import 'package:raai/core/utils/app_icons.dart';
 import 'package:raai/core/utils/styling.dart';
 import 'package:raai/core/widget/app_button.dart';
-import 'package:raai/core/widget/app_button_back.dart';
 import 'package:raai/core/widget/app_text_field.dart';
+import 'package:raai/core/widget/custom_app_bar_app.dart';
 import 'package:raai/feature/add_reads/presentation/manager/add_read/add_reading_cubit.dart';
 import 'package:raai/feature/add_reads/presentation/manager/add_reads_cubit.dart';
 import 'package:raai/feature/add_reads/presentation/view/widget/custom_bloc_listener_add_reads.dart';
@@ -20,6 +20,7 @@ class AddReadsScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = context.read<AddReadingCubit>();
+    final cubit = context.watch<AddReadingCubit>();
     final state = context.watch<AddReadsCubit>();
 
     return SingleChildScrollView(
@@ -28,18 +29,11 @@ class AddReadsScreenBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const RSizedBox(height: 55),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AppButtonBack(
-                onPressed: () {
-                  context.pop();
-                },
-                isLabel: false,
-              ),
-              Text('إضافة قراءة', style: AppTextStyles.s28.w700.textNormal),
-              const RSizedBox(width: 45),
-            ],
+          CustomAppBarApp(
+            title: 'إضافة قراءة',
+            onPressed: () {
+              context.pop<bool>(cubit.isSend);
+            },
           ),
           const RSizedBox(height: 24),
           Text('اختر نوع القياس', style: AppTextStyles.s20.w600.subTextNormal),

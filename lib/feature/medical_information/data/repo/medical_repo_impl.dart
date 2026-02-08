@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:raai/core/failure/api_failure.dart';
+import 'package:raai/core/failure/dio_error_mapper.dart';
 import 'package:raai/core/model/api_response.dart';
 import 'package:raai/feature/medical_information/data/data_source/medical_remote_data_source.dart';
 import 'package:raai/feature/medical_information/domain/repo/medical_repo.dart';
@@ -23,7 +24,7 @@ class MedicalRepoImpl extends MedicalRepo {
         return left(ServerFailure(response.appCode));
       }
 
-      return left(ServerFailure(999));
+      return left(DioErrorMapper.map(e));
     } catch (e) {
       return left(ServerFailure(null));
     }

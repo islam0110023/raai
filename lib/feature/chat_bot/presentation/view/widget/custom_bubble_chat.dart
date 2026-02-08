@@ -51,7 +51,7 @@ class CustomBubbleChat extends StatelessWidget {
             maxWidth: ScreenUtil.defaultSize.width * .75,
           ),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
             decoration: BoxDecoration(
               color: AppColor.disableLightHover,
               borderRadius: BorderRadius.only(

@@ -11,6 +11,7 @@ abstract class AppConstant {
   static const cacheKeyUserRoleKeyName = 'userRole';
   static const cacheKeyShowOnBoarding = 'showOnBoarding';
   static const cacheKeyIsLoggedIn = 'isLoggedIn';
+  static const cacheKeyCaregiverIsLoggedIn = 'isLoggedInCaregiver';
   static const kDurationSplash = 3;
 
   static void precacheAppImages(BuildContext context) {
@@ -31,6 +32,71 @@ abstract class AppConstant {
     final year = DateFormat('y', 'en').format(date);
 
     return '$time $amPm $day $month $year';
+  }
+
+  static String formatSugarTimeAtLikeUI(String isoDate) {
+    final date = DateTime.parse(isoDate).toLocal();
+
+    final time = DateFormat('h:mm', 'en').format(date);
+    final amPm = DateFormat('a', 'ar').format(date); // ص / م
+
+    return '$time $amPm';
+  }
+
+  static String formatSugarMonthAtLikeUI(String isoDate) {
+    final date = DateTime.parse(isoDate).toLocal();
+
+    final day = DateFormat('d', 'en').format(date);
+    final month = DateFormat('M', 'en').format(date);
+
+    return '$month/$day';
+  }
+
+  static int calculateAge(String dateOfBirth) {
+    final dob = DateTime.parse(dateOfBirth).toLocal();
+    final today = DateTime.now().toLocal();
+    int age = today.year - dob.year;
+    if (today.month < dob.month ||
+        (today.month == dob.month && today.day < dob.day)) {
+      age--;
+    }
+    return age;
+  }
+
+  static DateTime? getMaxDate(DateTime? date1, DateTime? date2) {
+    if (date1 == null && date2 == null) return null;
+    if (date1 == null) return date2;
+    if (date2 == null) return date1;
+
+    return date1.isAfter(date2) ? date1 : date2;
+  }
+
+  static String formatLastAdded(DateTime? date) {
+    if (date == null) return 'اخر اضافه : لا يوجد';
+
+    final localDate = date.toLocal();
+
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final yesterday = today.subtract(const Duration(days: 1));
+    final dateDay = DateTime(localDate.year, localDate.month, localDate.day);
+
+    final timeFormat = DateFormat('hh:mm a', 'en');
+    final time = timeFormat
+        .format(localDate)
+        .replaceAll('AM', 'ص')
+        .replaceAll('PM', 'م');
+
+    if (dateDay == today) {
+      return 'اخر اضافه : اليوم $time';
+    }
+
+    if (dateDay == yesterday) {
+      return 'اخر اضافه : أمس $time';
+    }
+
+    final fullDate = DateFormat('dd/MM/yyyy', 'en').format(localDate);
+    return 'اخر اضافه : $fullDate $time';
   }
 
   // static ScaffoldFeatureController<SnackBar, SnackBarClosedReason>

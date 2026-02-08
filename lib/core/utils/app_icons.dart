@@ -26,4 +26,16 @@ class AppIcons {
   static const attachment = 'assets/icons/attachment.svg';
   static const microphone = 'assets/icons/microphone.svg';
   static const volume = 'assets/icons/volume.svg';
+  static const editing = 'assets/icons/editing.svg';
+  static const notification = 'assets/icons/notification.svg';
+  static const mail = 'assets/icons/mail.svg';
+  static const padLock = 'assets/icons/pad_lock.svg';
+  static const multipleUser = 'assets/icons/multiple_user.svg';
+  static const records = 'assets/icons/records.svg';
+  static const medicalRate = 'assets/icons/medical_rate.svg';
+  static const logout = 'assets/icons/logout.svg';
+  static const validationCheck = 'assets/icons/validation_check.svg';
+  static const errorCheck = 'assets/icons/error_check.svg';
+  static const warningDesktop = 'assets/icons/warning_disktop.svg';
+
 }

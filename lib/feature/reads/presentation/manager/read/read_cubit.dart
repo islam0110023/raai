@@ -22,6 +22,8 @@ class ReadCubit extends Cubit<ReadState> {
     sugarController = TextEditingController();
   }
 
+  DateTime? recordedAt;
+
   void getSugarReads() async {
     emit(ReadSugarLoading());
     final data = await getSugarReadsUseCase();
@@ -34,6 +36,8 @@ class ReadCubit extends Cubit<ReadState> {
         if (data.isEmpty) {
           emit(ReadSugarNoData());
         } else {
+          recordedAt = data[0].recordedAtDate;
+
           emit(ReadSugarSuccess(data));
         }
       },

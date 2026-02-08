@@ -42,6 +42,12 @@ class LoginCubit extends Cubit<LoginState> {
                 value: true,
               );
             }
+            if (data.appCode == 452) {
+              await CacheHelper.saveData(
+                key: AppConstant.cacheKeyCaregiverIsLoggedIn,
+                value: true,
+              );
+            }
 
             emit(LoginSuccess(data));
           } catch (_) {

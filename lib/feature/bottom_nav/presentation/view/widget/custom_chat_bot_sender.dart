@@ -17,9 +17,9 @@ class CustomChatBotSender extends StatelessWidget {
 
     return Container(
       margin: REdgeInsets.only(
-        top: 8,
+        top: 48,
         bottom: MediaQuery.of(context).viewInsets.bottom == 0
-            ? 8
+            ? 48
             : MediaQuery.of(context).viewInsets.bottom,
         left: 26,
         right: 26,

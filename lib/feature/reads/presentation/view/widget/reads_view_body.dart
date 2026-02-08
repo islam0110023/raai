@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:raai/core/utils/constants.dart';
 import 'package:raai/core/utils/styling.dart';
+import 'package:raai/feature/reads/presentation/manager/blood/blood_cubit.dart';
+import 'package:raai/feature/reads/presentation/manager/read/read_cubit.dart';
 import 'package:raai/feature/reads/presentation/view/widget/custom_row_feature_reads.dart';
 import 'package:raai/feature/reads/presentation/view/widget/custom_tab_bar_view_reads.dart';
 
@@ -24,6 +28,8 @@ class _ReadsViewBodyState extends State<ReadsViewBody>
 
   @override
   Widget build(BuildContext context) {
+    final stateRead = context.watch<ReadCubit>();
+    final stateBlood = context.watch<BloodCubit>();
     return Padding(
       padding: REdgeInsets.symmetric(horizontal: 16.r),
       child: Column(
@@ -33,7 +39,12 @@ class _ReadsViewBodyState extends State<ReadsViewBody>
           Text('القراءات الصحية', style: AppTextStyles.s24.w700.textNormal),
           const RSizedBox(height: 8),
           Text(
-            'اخر اضافه : اليوم 10:30 ص',
+            AppConstant.formatLastAdded(
+              AppConstant.getMaxDate(
+                stateRead.recordedAt,
+                stateBlood.recordedAt,
+              ),
+            ),
             style: AppTextStyles.s16.w500.subTextNormal,
           ),
           const RSizedBox(height: 16),

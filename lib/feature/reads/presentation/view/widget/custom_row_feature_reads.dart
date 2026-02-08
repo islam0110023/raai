@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +7,8 @@ import 'package:raai/core/utils/app_color.dart';
 import 'package:raai/core/utils/app_icons.dart';
 import 'package:raai/core/utils/routes.dart';
 import 'package:raai/core/utils/styling.dart';
+import 'package:raai/feature/reads/presentation/manager/blood/blood_cubit.dart';
+import 'package:raai/feature/reads/presentation/manager/read/read_cubit.dart';
 import 'package:raai/feature/reads/presentation/view/widget/custom_tab_bar_reads.dart';
 
 class CustomRowFeatureReads extends StatefulWidget {
@@ -30,15 +33,14 @@ class _CustomRowFeatureReadsState extends State<CustomRowFeatureReads> {
             duration: const Duration(milliseconds: 400),
             curve: Curves.easeInOut,
             child: Container(
-              padding: isExpanded
-                  ? REdgeInsets.fromLTRB(0, 4, 16, 4)
-                  : REdgeInsets.all(8),
+              //  padding: isExpanded ? REdgeInsets.fromLTRB(0, 4, 16, 4) : null,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(45.r),
                 border: Border.all(color: AppColor.primaryNormal, width: 3.r),
               ),
               child: Row(
                 children: [
+                  if (isExpanded) const RSizedBox(width: 8),
                   InkWell(
                     onTap: () {
                       setState(() {
@@ -46,27 +48,38 @@ class _CustomRowFeatureReadsState extends State<CustomRowFeatureReads> {
                       });
                     },
                     borderRadius: BorderRadius.circular(45.r),
-                    radius: 10.r,
+                    radius: 100.r,
+                    splashColor: AppColor.secondaryLightHover,
                     hoverColor: AppColor.secondaryLightHover,
-                    child: SvgPicture.asset(
-                      isExpanded ? AppIcons.filterLeft : AppIcons.filterRight,
+                    child: Padding(
+                      padding: REdgeInsets.all(8.0),
+                      child: SvgPicture.asset(
+                        isExpanded ? AppIcons.filterLeft : AppIcons.filterRight,
+                      ),
                     ),
                   ),
-                  AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
-                    transitionBuilder: (child, animation) {
-                      return FadeTransition(
-                        opacity: animation,
-                        child: SizeTransition(
-                          sizeFactor: animation,
-                          axis: Axis.horizontal,
-                          child: child,
-                        ),
-                      );
-                    },
-                    child: isExpanded
-                        ? CustomTabBarReads(tabController: widget.tabController)
-                        : const SizedBox(key: ValueKey('empty')),
+                  Padding(
+                    padding: isExpanded
+                        ? REdgeInsets.symmetric(vertical: 4)
+                        : EdgeInsets.zero,
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      transitionBuilder: (child, animation) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: SizeTransition(
+                            sizeFactor: animation,
+                            axis: Axis.horizontal,
+                            child: child,
+                          ),
+                        );
+                      },
+                      child: isExpanded
+                          ? CustomTabBarReads(
+                              tabController: widget.tabController,
+                            )
+                          : const SizedBox(key: ValueKey('empty')),
+                    ),
                   ),
                 ],
               ),
@@ -74,11 +87,16 @@ class _CustomRowFeatureReadsState extends State<CustomRowFeatureReads> {
           ),
         ),
         InkWell(
-          onTap: () {
-            context.push(
+          onTap: () async {
+            final result = await context.push(
               AppRoutes.addReads,
               extra: widget.tabController.index == 0 ? true : false,
             );
+            if (result == true) {
+              if (!context.mounted) return;
+              context.read<ReadCubit>().getSugarReads();
+              context.read<BloodCubit>().getBloodReads();
+            }
           },
           borderRadius: BorderRadius.circular(45.r),
           radius: 100.r,

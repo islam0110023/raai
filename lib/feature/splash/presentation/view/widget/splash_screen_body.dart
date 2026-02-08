@@ -68,8 +68,17 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
   void navigateToNextScreen() async {
     final isLoggedIn =
         await CacheHelper.getData(key: AppConstant.cacheKeyIsLoggedIn) ?? false;
+    final isCaregiverLoggedIn =
+        await CacheHelper.getData(
+          key: AppConstant.cacheKeyCaregiverIsLoggedIn,
+        ) ??
+        false;
 
     if (!mounted) return;
+    if (isCaregiverLoggedIn == true) {
+      context.go(AppRoutes.camingSoon);
+      return;
+    }
 
     if (isLoggedIn == true) {
       context.go(AppRoutes.homeScreen);
