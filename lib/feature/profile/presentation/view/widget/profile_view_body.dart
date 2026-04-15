@@ -40,6 +40,9 @@ class ProfileViewBody extends StatelessWidget {
               ItemsProfileModel(
                 icon: AppIcons.notification,
                 title: 'الاشعارات و التنبيهات',
+                onTap: () {
+                  context.push(AppRoutes.notificationScreen);
+                },
               ),
               ItemsProfileModel(icon: AppIcons.mail, title: 'اللغه و التفاعل'),
               ItemsProfileModel(

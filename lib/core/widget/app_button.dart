@@ -65,6 +65,8 @@ class AppButton extends StatelessWidget {
     double? width,
     Color? backgroundColor,
     double? radius = 45,
+    double? borderWidth,
+    bool isOutlineColor = true,
   }) {
     return AppButton(
       key: key,
@@ -72,13 +74,13 @@ class AppButton extends StatelessWidget {
       onPressed: onPressed,
       loading: loading,
       width: width,
-      isOutline: true,
+      isOutline:isOutlineColor? true:false,
       radius: radius!,
       style: OutlinedButton.styleFrom(
         backgroundColor: AppColor.white,
         foregroundColor: textColor,
         minimumSize: size,
-        side: BorderSide(color: borderColor, width: 3.r),
+        side: BorderSide(color: borderColor, width: borderWidth ?? 3.r),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius.r),
         ),

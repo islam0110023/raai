@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -125,6 +126,11 @@ class AddReadsScreenBody extends StatelessWidget {
                     hint: 'قيمة السكر',
                     textAlign: TextAlign.center,
                     controller: controller.sugarController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(3),
+                    ],
                     padding: REdgeInsets.symmetric(
                       vertical: 24,
                       horizontal: 16,
@@ -144,6 +150,11 @@ class AddReadsScreenBody extends StatelessWidget {
                     hint: 'الضغط الانبساطي',
                     textAlign: TextAlign.center,
                     controller: controller.diastolicController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(3),
+                    ],
                     padding: REdgeInsets.symmetric(
                       vertical: 24,
                       horizontal: 12,
@@ -155,6 +166,11 @@ class AddReadsScreenBody extends StatelessWidget {
                   child: AppTextField(
                     hint: 'الضغط الانقباضي',
                     textAlign: TextAlign.center,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(3),
+                    ],
                     controller: controller.systolicController,
                     padding: REdgeInsets.symmetric(
                       vertical: 24,

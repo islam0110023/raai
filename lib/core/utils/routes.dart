@@ -28,6 +28,7 @@ import 'package:raai/feature/models/presentation/manager/sugar_monthly/sugar_mon
 import 'package:raai/feature/models/presentation/view/select_models_screen.dart';
 import 'package:raai/feature/models/presentation/view/sugar_daily_model_screen.dart';
 import 'package:raai/feature/models/presentation/view/sugar_monthly_model_screen.dart';
+import 'package:raai/feature/notification/presentation/view/notification_screen.dart';
 import 'package:raai/feature/onboarding/presentation/view/on_boarding_screen.dart';
 import 'package:raai/feature/personal_info/presentation/manager/personal_cubit.dart';
 import 'package:raai/feature/personal_info/presentation/view/personal_info_screen.dart';
@@ -54,6 +55,8 @@ class AppRoutes {
   static const sugarMonthlyModel = '/sugar-monthly-model';
   static const sugarDailyModel = '/sugar-daily-model';
   static const camingSoon = '/coming-soon';
+  static const notificationScreen = '/notification-screen';
+
 
   static final route = GoRouter(
     navigatorKey: navigatorKey,
@@ -176,6 +179,10 @@ class AppRoutes {
       GoRoute(
         path: camingSoon,
         builder: (context, state) => const ComingSoon(),
+      ),
+      GoRoute(
+        path: notificationScreen,
+        builder: (context, state) => const NotificationScreen(),
       ),
     ],
   );

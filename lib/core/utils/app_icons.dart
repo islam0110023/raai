@@ -37,5 +37,13 @@ class AppIcons {
   static const validationCheck = 'assets/icons/validation_check.svg';
   static const errorCheck = 'assets/icons/error_check.svg';
   static const warningDesktop = 'assets/icons/warning_disktop.svg';
+  static const panadolIcon = 'assets/icons/panadol_icon.svg';
+  static const bloodNotIcon = 'assets/icons/blood_not_icon.svg';
+  static const reportIcon = 'assets/icons/report_icon.svg';
+  static const rubbish = 'assets/icons/rubbish.svg';
+  static const personNot = 'assets/icons/person_not.svg';
+
+
+
 
 }
