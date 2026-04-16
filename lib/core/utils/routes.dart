@@ -19,6 +19,7 @@ import 'package:raai/feature/auth/presentation/view/verify_o_t_p_screen.dart';
 import 'package:raai/feature/bottom_nav/presentation/manager/bottom_nav_cubit.dart';
 import 'package:raai/feature/bottom_nav/presentation/view/coming_soon.dart';
 import 'package:raai/feature/bottom_nav/presentation/view/home_screen.dart';
+import 'package:raai/feature/caregivers/presentation/view/caregivers_list_screen.dart';
 import 'package:raai/feature/chat_bot/presentation/manager/chat_bot_cubit.dart';
 import 'package:raai/feature/medical_information/presentation/manager/medical_info_cubit.dart';
 import 'package:raai/feature/medical_information/presentation/view/confirmation_screen.dart';
@@ -56,6 +57,8 @@ class AppRoutes {
   static const sugarDailyModel = '/sugar-daily-model';
   static const camingSoon = '/coming-soon';
   static const notificationScreen = '/notification-screen';
+  static const caregiverList = '/caregiver-list';
+
 
 
   static final route = GoRouter(
@@ -183,6 +186,10 @@ class AppRoutes {
       GoRoute(
         path: notificationScreen,
         builder: (context, state) => const NotificationScreen(),
+      ),
+      GoRoute(
+        path: caregiverList,
+        builder: (context, state) => const CaregiversListScreen(),
       ),
     ],
   );

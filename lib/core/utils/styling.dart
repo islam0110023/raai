@@ -49,6 +49,8 @@ class FontWeightStyle {
   TextStyle get green => _createStyle(color: AppColor.green);
   TextStyle get greenNormal => _createStyle(color: AppColor.greenNormal);
   TextStyle get redNormalActive => _createStyle(color: AppColor.redNormalActive);
+  TextStyle get primaryDarker => _createStyle(color: AppColor.primaryDarker);
+
 
   TextStyle _createStyle({required Color color}) {
     return TextStyle(

@@ -42,6 +42,8 @@ class AppIcons {
   static const reportIcon = 'assets/icons/report_icon.svg';
   static const rubbish = 'assets/icons/rubbish.svg';
   static const personNot = 'assets/icons/person_not.svg';
+  static const menuHer = 'assets/icons/menu_her.svg';
+  static const menuVertical = 'assets/icons/menu_vertical.svg';
 
 
 

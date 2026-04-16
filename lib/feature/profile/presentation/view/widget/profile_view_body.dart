@@ -60,6 +60,9 @@ class ProfileViewBody extends StatelessWidget {
                 icon: AppIcons.multipleUser,
                 title: 'المرافقيين',
                 index: 1,
+                onTap: () {
+                  context.push(AppRoutes.caregiverList);
+                },
               ),
               ItemsProfileModel(
                 icon: AppIcons.records,
