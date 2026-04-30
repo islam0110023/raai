@@ -4,6 +4,7 @@ import 'package:raai/core/utils/app_color.dart';
 import 'package:raai/core/utils/styling.dart';
 import 'package:raai/core/widget/custom_app_bar_app.dart';
 import 'package:raai/feature/caregivers/presentation/view/widget/custom_card_caregivers_list.dart';
+import 'package:raai/feature/caregivers/presentation/view/widget/custom_dialog_remove_caregiver.dart';
 
 class CaregiversListScreenBody extends StatelessWidget {
   const CaregiversListScreenBody({super.key});
@@ -36,10 +37,24 @@ class CaregiversListScreenBody extends StatelessWidget {
             ),
           ),
           const RSizedBox(height: 24),
-          const CustomCardCaregiversList(
+          CustomCardCaregiversList(
             title: 'شعبان عبد الرحيم',
             subtitle: 'مرافق رئيسي',
             status: 'متصل',
+            onDelete: () {
+              showDialog(
+                context: context,
+                useSafeArea: false,
+                animationStyle: const AnimationStyle(
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                ),
+                barrierColor: AppColor.white.withAlpha(50),
+                builder: (context) {
+                  return const CustomDialogRemoveCaregiver();
+                },
+              );
+            },
           ),
           const RSizedBox(height: 16),
         ],

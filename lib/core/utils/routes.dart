@@ -19,6 +19,7 @@ import 'package:raai/feature/auth/presentation/view/verify_o_t_p_screen.dart';
 import 'package:raai/feature/bottom_nav/presentation/manager/bottom_nav_cubit.dart';
 import 'package:raai/feature/bottom_nav/presentation/view/coming_soon.dart';
 import 'package:raai/feature/bottom_nav/presentation/view/home_screen.dart';
+import 'package:raai/feature/caregivers/presentation/view/add_caregiver_screen.dart';
 import 'package:raai/feature/caregivers/presentation/view/caregivers_list_screen.dart';
 import 'package:raai/feature/chat_bot/presentation/manager/chat_bot_cubit.dart';
 import 'package:raai/feature/medical_information/presentation/manager/medical_info_cubit.dart';
@@ -58,6 +59,8 @@ class AppRoutes {
   static const camingSoon = '/coming-soon';
   static const notificationScreen = '/notification-screen';
   static const caregiverList = '/caregiver-list';
+  static const addCaregiver = '/add-caregiver';
+
 
 
 
@@ -190,6 +193,10 @@ class AppRoutes {
       GoRoute(
         path: caregiverList,
         builder: (context, state) => const CaregiversListScreen(),
+      ),
+      GoRoute(
+        path: addCaregiver,
+        builder: (context, state) => const AddCaregiverScreen(),
       ),
     ],
   );

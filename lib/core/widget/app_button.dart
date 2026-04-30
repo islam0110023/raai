@@ -14,6 +14,8 @@ class AppButton extends StatelessWidget {
     this.width,
     required this.radius,
     this.isOutline = false,
+    this.widget,
+    this.isWidget = false,
   });
 
   factory AppButton.filled({
@@ -27,6 +29,7 @@ class AppButton extends StatelessWidget {
     bool loading = false,
     Color buttonColor = AppColor.primaryNormal,
     double? radius = 45,
+    bool isOutlineColor = true,
   }) {
     return AppButton(
       key: key,
@@ -45,7 +48,7 @@ class AppButton extends StatelessWidget {
             padding ?? EdgeInsets.symmetric(vertical: 16.r, horizontal: 24.r),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius.r),
-          side: BorderSide(color: AppColor.secondaryLightHover, width: 3.r),
+          side:isOutlineColor? BorderSide(color: AppColor.secondaryLightHover, width: 3.r):BorderSide.none,
         ),
       ),
       textStyle: textStyle ?? AppTextStyles.s16.w500.white,
@@ -67,6 +70,8 @@ class AppButton extends StatelessWidget {
     double? radius = 45,
     double? borderWidth,
     bool isOutlineColor = true,
+    Widget? widget,
+    bool isWidget = false,
   }) {
     return AppButton(
       key: key,
@@ -76,6 +81,8 @@ class AppButton extends StatelessWidget {
       width: width,
       isOutline:isOutlineColor? true:false,
       radius: radius!,
+      widget: widget,
+      isWidget: isWidget,
       style: OutlinedButton.styleFrom(
         backgroundColor: AppColor.white,
         foregroundColor: textColor,
@@ -99,6 +106,9 @@ class AppButton extends StatelessWidget {
   final double? width;
   final double radius;
   final bool isOutline;
+  final Widget? widget;
+  final bool isWidget;
+
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +134,7 @@ class AppButton extends StatelessWidget {
                     color: AppColor.white,
                   ),
                 )
-              : Text(text, style: textStyle),
+              :isWidget? widget: Text(text, style: textStyle),
         ),
       ),
     );

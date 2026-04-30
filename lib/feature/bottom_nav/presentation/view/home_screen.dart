@@ -5,6 +5,7 @@ import 'package:raai/feature/bottom_nav/presentation/view/widget/coming_soon_bod
 import 'package:raai/feature/bottom_nav/presentation/view/widget/custom_bottom_nav_bar.dart';
 import 'package:raai/feature/bottom_nav/presentation/view/widget/custom_chat_bot_sender.dart';
 import 'package:raai/feature/chat_bot/presentation/view/chat_bot_view.dart';
+import 'package:raai/feature/home/presentation/view/home_view.dart';
 import 'package:raai/feature/profile/presentation/view/profile_view.dart';
 import 'package:raai/feature/reads/presentation/view/reads_view.dart';
 
@@ -23,7 +24,7 @@ class HomeScreen extends StatelessWidget {
       body: IndexedStack(
         index: state.currentIndex,
         children: [
-          const ComingSoonBody(isCaregiver: false),
+          const HomeView(),
           state.isSelected[1]
               ? const ComingSoonBody(isCaregiver: false)
               : const SizedBox(),

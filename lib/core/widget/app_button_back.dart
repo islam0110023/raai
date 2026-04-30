@@ -12,11 +12,13 @@ class AppButtonBack extends StatelessWidget {
     this.backgroundColor,
     this.isLabel = true,
     this.isAuth = false,
+    this.icon,
   });
   final VoidCallback onPressed;
   final Color? backgroundColor;
   final bool isLabel;
   final bool isAuth;
+  final String? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class AppButtonBack extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    SvgPicture.asset(AppIcons.arrowBack),
+                    SvgPicture.asset(icon ?? AppIcons.arrowBack),
                     Visibility(
                       visible: isLabel,
                       child: Padding(
@@ -81,7 +83,7 @@ class AppButtonBack extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SvgPicture.asset(AppIcons.arrowBack),
+                  SvgPicture.asset(icon ?? AppIcons.arrowBack),
                   Visibility(
                     visible: isLabel,
                     child: Padding(

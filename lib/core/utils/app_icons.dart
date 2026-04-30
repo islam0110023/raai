@@ -44,6 +44,12 @@ class AppIcons {
   static const personNot = 'assets/icons/person_not.svg';
   static const menuHer = 'assets/icons/menu_her.svg';
   static const menuVertical = 'assets/icons/menu_vertical.svg';
+  static const alertWarning = 'assets/icons/alert_warning.svg';
+  static const editCopy = 'assets/icons/edit_copy.svg';
+  static const alertAlarm = 'assets/icons/alert_alarm.svg';
+
+
+
 
 
 
