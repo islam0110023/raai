@@ -6,9 +6,7 @@ import 'package:raai/core/utils/styling.dart';
 import 'package:raai/core/widget/app_button_back.dart';
 
 class CustomUpperNotification extends StatelessWidget {
-  const CustomUpperNotification({
-    super.key,
-  });
+  const CustomUpperNotification({super.key});
 
   @override
   Widget build(BuildContext context) {

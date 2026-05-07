@@ -11,11 +11,15 @@ class GetMessagesUseCase {
     required List<HistoryParam> historyParam,
     required String message,
     required String sessionId,
+    required String userName,
+    required String userGender,
   }) async {
     return await chatBotRepo.getMessages(
       historyParam: historyParam,
       message: message,
       sessionId: sessionId,
+      userName: userName,
+      userGender: userGender,
     );
   }
 }

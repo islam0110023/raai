@@ -4,9 +4,7 @@ import 'package:raai/core/utils/app_color.dart';
 import 'package:raai/core/utils/styling.dart';
 
 class CustomStatusHomeView extends StatelessWidget {
-  const CustomStatusHomeView({
-    super.key,
-  });
+  const CustomStatusHomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +19,9 @@ class CustomStatusHomeView extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CircleAvatar(
-              backgroundColor: AppColor.greenNormal,
-              radius: 8.r,
-            ),
+            CircleAvatar(backgroundColor: AppColor.greenNormal, radius: 8.r),
             const RSizedBox(width: 8),
-            Text(
-              'حالتك اليوم:',
-              style: AppTextStyles.s16.w500.subTextNormal,
-            ),
+            Text('حالتك اليوم:', style: AppTextStyles.s16.w500.subTextNormal),
             const RSizedBox(width: 4),
             Text('مطمئن', style: AppTextStyles.s16.w500.greenNormal),
             const RSizedBox(width: 50),

@@ -8,5 +8,7 @@ abstract class ChatBotRepo {
     required List<HistoryParam> historyParam,
     required String message,
     required String sessionId,
+    required String userName,
+    required String userGender,
   });
 }

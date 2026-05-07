@@ -15,12 +15,16 @@ class ChatBotRepoImpl extends ChatBotRepo {
     required List<HistoryParam> historyParam,
     required String message,
     required String sessionId,
+    required String userName,
+    required String userGender,
   }) async {
     try {
       final response = await chatBotRemoteDataSource.getMessages(
         historyParam: historyParam,
         message: message,
         sessionId: sessionId,
+        userName: userName,
+        userGender: userGender,
       );
       return Right(response);
     } on DioException catch (e) {

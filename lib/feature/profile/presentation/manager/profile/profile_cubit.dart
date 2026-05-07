@@ -7,10 +7,12 @@ import 'package:raai/feature/profile/domain/use_case/get_user_profile_use_case.d
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  ProfileCubit(this.getUserProfileUseCase) : super(ProfileInitial()){
-    getUserProfile();
+  ProfileCubit(this.getUserProfileUseCase) : super(ProfileInitial()) {
+    // getUserProfile();
   }
   final GetUserProfileUseCase getUserProfileUseCase;
+  ProfileUserEntity? profileUserEntity;
+
   void getUserProfile() async {
     emit(ProfileLoading());
     final result = await getUserProfileUseCase();
@@ -20,6 +22,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         emit(ProfileFailure(message, failure.appCode));
       },
       (data) {
+        profileUserEntity = data;
         emit(ProfileSuccess(data));
       },
     );

@@ -23,11 +23,17 @@ class ChatBotCubit extends Cubit<ChatBotState> {
     ),
   ];
 
-  Future<void> getMessages({required String sessionId}) async {
+  Future<void> getMessages({
+    required String sessionId,
+    required String userName,
+    required String userGender,
+  }) async {
     final result = await getMessagesUseCase.call(
       historyParam: histories,
       message: _lastUserMessage ?? textEditingController.text,
       sessionId: sessionId,
+      userName: userName,
+      userGender: userGender,
     );
     result.fold(
       (l) {
@@ -51,7 +57,11 @@ class ChatBotCubit extends Cubit<ChatBotState> {
 
   DateTime? lastRetryTime;
 
-  void retryLastMessage() {
+  void retryLastMessage({
+    required String sessionId,
+    required String userName,
+    required String userGender,
+  }) {
     if (_lastUserMessage == null) return;
 
     if (lastRetryTime != null &&
@@ -67,7 +77,11 @@ class ChatBotCubit extends Cubit<ChatBotState> {
 
     emit(ChatBotMessageAdd());
 
-    getMessages(sessionId: 'user123');
+    getMessages(
+      sessionId: sessionId,
+      userName: userName,
+      userGender: userGender,
+    );
   }
 
   void removeLoadingIfExist() {

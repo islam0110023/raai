@@ -47,8 +47,14 @@ class AppIcons {
   static const alertWarning = 'assets/icons/alert_warning.svg';
   static const editCopy = 'assets/icons/edit_copy.svg';
   static const alertAlarm = 'assets/icons/alert_alarm.svg';
-
-
+  static const injection = 'assets/icons/injection_icon.svg';
+  static const food = 'assets/icons/food_icon.svg';
+  static const clock = 'assets/icons/clock_icon.svg';
+  static const bagPlus = 'assets/icons/bag_plus.svg';
+  static const addCamera = 'assets/icons/add_camera.svg';
+  static const tablet = 'assets/icons/tablet_icon.svg';
+  static const waterMedicine = 'assets/icons/water_medicine.svg';
+  static const injectionMedicine = 'assets/icons/injection_medicine.svg';
 
 
 

@@ -16,5 +16,4 @@ class SugarProfileEntity {
   final int valueMgDl;
   final String status;
   final Color trafficColor;
-
 }

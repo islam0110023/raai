@@ -22,9 +22,9 @@ class SugarMonthlyCubit extends Cubit<SugarMonthlyState> {
         emit(SugarMonthlyFailure(message, failure.appCode));
       },
       (data) {
-        Future.delayed(const Duration(seconds: 3),() {
+        Future.delayed(const Duration(seconds: 3), () {
           emit(SugarMonthlySuccess(data));
-        },);
+        });
       },
     );
   }

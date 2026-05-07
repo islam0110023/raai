@@ -8,6 +8,7 @@ import 'package:raai/feature/chat_bot/presentation/view/widget/custom_bubble_cha
 import 'package:raai/feature/chat_bot/presentation/view/widget/custom_bubble_loading.dart';
 import 'package:raai/feature/chat_bot/presentation/view/widget/custom_bubble_user.dart';
 import 'package:raai/feature/chat_bot/presentation/view/widget/custom_upper_chat_bot_view.dart';
+import 'package:raai/feature/profile/presentation/manager/profile/profile_cubit.dart';
 
 class ChatBotViewBody extends StatefulWidget {
   const ChatBotViewBody({super.key});
@@ -96,7 +97,14 @@ class _ChatBotViewBodyState extends State<ChatBotViewBody> {
                         message: state.messages[index].message,
                         isError: true,
                         onTap: () {
-                          controller.retryLastMessage();
+                          final user = context
+                              .read<ProfileCubit>()
+                              .profileUserEntity;
+                          controller.retryLastMessage(
+                            sessionId: user!.personalData.id.toString(),
+                            userName: user.personalData.firstName,
+                            userGender: user.personalData.gender,
+                          );
                         },
                       );
                     } else {

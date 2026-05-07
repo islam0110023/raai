@@ -1,8 +1,8 @@
 class Endpoints {
   Endpoints._();
-  static const String baseUrl = 'https://ra3y.ddns.net';
+  static const String baseUrl = 'https://ra3y.me:4430';
   static const String chatBot =
-      'https://cloud.activepieces.com/api/v1/webhooks/5z6blAkcp9YP7TVyJwpWp/sync';
+      'https://cloud.activepieces.com/api/v1/webhooks/uostrq272HpWBW9c0j9Rg/sync';
   static String merge(String url) {
     return baseUrl + url;
   }

@@ -3,6 +3,6 @@ class HistoryParam {
   final String role;
   final String text;
   Map<String, dynamic> toMap() {
-    return {'role': role, 'text': text};
+    return {'role': role, 'parts': [{ 'text': text }]};
   }
 }

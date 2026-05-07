@@ -8,6 +8,8 @@ abstract class ChatBotRemoteDataSource {
     required List<HistoryParam> historyParam,
     required String message,
     required String sessionId,
+    required String userName,
+    required String userGender,
   });
 }
 
@@ -17,13 +19,17 @@ class ChatBotRemoteDataSourceImpl extends ChatBotRemoteDataSource {
     required List<HistoryParam> historyParam,
     required String message,
     required String sessionId,
+    required String userName,
+    required String userGender,
   }) async {
     final response = await DioHelper.postData(
       url: Endpoints.chatBot,
       data: {
         'message': message,
-        'sessionId': 'user_123',
+        'sessionId': sessionId,
         'history': historyParam.map((e) => e.toMap()).toList(),
+        'userName': userName,
+        'userGender': userGender,
       },
     );
     return ChatBotEntity(replay: response.data['reply']);

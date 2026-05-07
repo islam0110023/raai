@@ -2,7 +2,6 @@ import 'package:raai/feature/profile/data/model/profile_user_model/blood_pressur
 import 'package:raai/feature/profile/data/model/profile_user_model/sugar.dart';
 
 class LastReadings {
-
   factory LastReadings.fromJson(Map<String, dynamic> json) => LastReadings(
     sugar: json['sugar'] == null
         ? null

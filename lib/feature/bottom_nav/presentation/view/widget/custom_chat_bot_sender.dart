@@ -6,6 +6,7 @@ import 'package:raai/core/utils/app_color.dart';
 import 'package:raai/core/utils/app_icons.dart';
 import 'package:raai/core/utils/styling.dart';
 import 'package:raai/feature/chat_bot/presentation/manager/chat_bot_cubit.dart';
+import 'package:raai/feature/profile/presentation/manager/profile/profile_cubit.dart';
 
 class CustomChatBotSender extends StatelessWidget {
   const CustomChatBotSender({super.key});
@@ -17,7 +18,7 @@ class CustomChatBotSender extends StatelessWidget {
 
     return Container(
       margin: REdgeInsets.only(
-        top: 48,
+        top: 0,
         bottom: MediaQuery.of(context).viewInsets.bottom == 0
             ? 48
             : MediaQuery.of(context).viewInsets.bottom,
@@ -74,7 +75,12 @@ class CustomChatBotSender extends StatelessWidget {
                   if (controller.textEditingController.text.isEmpty) return;
                   if (state.messages.last.isLoading) return;
                   controller.addMessage(controller.textEditingController.text);
-                  controller.getMessages(sessionId: 'user123');
+                  final user = context.read<ProfileCubit>().profileUserEntity;
+                  controller.getMessages(
+                    sessionId: user!.personalData.id.toString(),
+                    userName: user.personalData.firstName,
+                    userGender: user.personalData.gender,
+                  );
                   controller.textEditingController.clear();
                 },
                 child: SvgPicture.asset(AppIcons.send),

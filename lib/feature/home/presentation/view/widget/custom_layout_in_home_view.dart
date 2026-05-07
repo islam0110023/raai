@@ -7,9 +7,7 @@ import 'package:raai/core/utils/styling.dart';
 import 'package:raai/core/widget/app_button.dart';
 
 class CustomLayoutInHomeView extends StatelessWidget {
-  const CustomLayoutInHomeView({
-    super.key,
-  });
+  const CustomLayoutInHomeView({super.key});
 
   @override
   Widget build(BuildContext context) {

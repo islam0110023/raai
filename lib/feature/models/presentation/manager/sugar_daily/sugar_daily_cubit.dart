@@ -21,9 +21,9 @@ class SugarDailyCubit extends Cubit<SugarDailyState> {
         emit(SugarDailyFailure(message, failure.appCode));
       },
       (data) {
-         Future.delayed(const Duration(seconds: 3),() {
-           emit(SugarDailySuccess(data));
-         },);
+        Future.delayed(const Duration(seconds: 3), () {
+          emit(SugarDailySuccess(data));
+        });
       },
     );
   }

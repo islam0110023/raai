@@ -48,7 +48,9 @@ class AppButton extends StatelessWidget {
             padding ?? EdgeInsets.symmetric(vertical: 16.r, horizontal: 24.r),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius.r),
-          side:isOutlineColor? BorderSide(color: AppColor.secondaryLightHover, width: 3.r):BorderSide.none,
+          side: isOutlineColor
+              ? BorderSide(color: AppColor.secondaryLightHover, width: 3.r)
+              : BorderSide.none,
         ),
       ),
       textStyle: textStyle ?? AppTextStyles.s16.w500.white,
@@ -79,7 +81,7 @@ class AppButton extends StatelessWidget {
       onPressed: onPressed,
       loading: loading,
       width: width,
-      isOutline:isOutlineColor? true:false,
+      isOutline: isOutlineColor ? true : false,
       radius: radius!,
       widget: widget,
       isWidget: isWidget,
@@ -109,7 +111,6 @@ class AppButton extends StatelessWidget {
   final Widget? widget;
   final bool isWidget;
 
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -134,7 +135,9 @@ class AppButton extends StatelessWidget {
                     color: AppColor.white,
                   ),
                 )
-              :isWidget? widget: Text(text, style: textStyle),
+              : isWidget
+              ? widget
+              : Text(text, style: textStyle),
         ),
       ),
     );

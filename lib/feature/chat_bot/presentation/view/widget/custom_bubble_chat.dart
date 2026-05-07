@@ -71,8 +71,9 @@ class CustomBubbleChat extends StatelessWidget {
 
         const RSizedBox(width: 4),
         Visibility(
-          visible: !isError,
-          replacement: InkWell(
+          visible: isError,
+          //replacement: ,
+          child: InkWell(
             onTap: onTap,
             borderRadius: BorderRadius.circular(45.r),
             splashColor: AppColor.primaryLightHover,
@@ -97,24 +98,6 @@ class CustomBubbleChat extends StatelessWidget {
               ),
               child: Iconify(Pajamas.retry, size: 12.r),
             ),
-          ),
-          child: Container(
-            width: 32.r,
-            height: 32.r,
-            padding: REdgeInsets.symmetric(vertical: 8, horizontal: 8),
-            decoration: BoxDecoration(
-              color: AppColor.white,
-              boxShadow: const [
-                BoxShadow(
-                  color: AppColor.shadowColor,
-                  offset: Offset(0, 0),
-                  blurRadius: 12,
-                  spreadRadius: 1,
-                ),
-              ],
-              borderRadius: BorderRadius.circular(45.r),
-            ),
-            child: SvgPicture.asset(AppIcons.volume),
           ),
         ),
       ],

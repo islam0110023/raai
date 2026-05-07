@@ -17,6 +17,7 @@ import 'package:raai/feature/auth/presentation/view/reset_password_screen.dart';
 import 'package:raai/feature/auth/presentation/view/select_role_screen.dart';
 import 'package:raai/feature/auth/presentation/view/verify_o_t_p_screen.dart';
 import 'package:raai/feature/bottom_nav/presentation/manager/bottom_nav_cubit.dart';
+import 'package:raai/feature/bottom_nav/presentation/manager/voice_cubit/voice_cubit.dart';
 import 'package:raai/feature/bottom_nav/presentation/view/coming_soon.dart';
 import 'package:raai/feature/bottom_nav/presentation/view/home_screen.dart';
 import 'package:raai/feature/caregivers/presentation/view/add_caregiver_screen.dart';
@@ -25,6 +26,7 @@ import 'package:raai/feature/chat_bot/presentation/manager/chat_bot_cubit.dart';
 import 'package:raai/feature/medical_information/presentation/manager/medical_info_cubit.dart';
 import 'package:raai/feature/medical_information/presentation/view/confirmation_screen.dart';
 import 'package:raai/feature/medical_information/presentation/view/medical_information_screen.dart';
+import 'package:raai/feature/medication/presenation/view/add_medication_screen.dart';
 import 'package:raai/feature/models/presentation/manager/sugar_daily/sugar_daily_cubit.dart';
 import 'package:raai/feature/models/presentation/manager/sugar_monthly/sugar_monthly_cubit.dart';
 import 'package:raai/feature/models/presentation/view/select_models_screen.dart';
@@ -34,6 +36,7 @@ import 'package:raai/feature/notification/presentation/view/notification_screen.
 import 'package:raai/feature/onboarding/presentation/view/on_boarding_screen.dart';
 import 'package:raai/feature/personal_info/presentation/manager/personal_cubit.dart';
 import 'package:raai/feature/personal_info/presentation/view/personal_info_screen.dart';
+import 'package:raai/feature/profile/presentation/manager/profile/profile_cubit.dart';
 import 'package:raai/feature/splash/presentation/view/splash_screen.dart';
 import 'package:raai/main.dart';
 
@@ -60,9 +63,7 @@ class AppRoutes {
   static const notificationScreen = '/notification-screen';
   static const caregiverList = '/caregiver-list';
   static const addCaregiver = '/add-caregiver';
-
-
-
+  static const addMedication = '/add-medication';
 
   static final route = GoRouter(
     navigatorKey: navigatorKey,
@@ -146,6 +147,8 @@ class AppRoutes {
           providers: [
             BlocProvider(create: (context) => BottomNavCubit()),
             BlocProvider(create: (context) => ChatBotCubit(getIt())),
+            BlocProvider(create: (context) => VoiceCubit()),
+            BlocProvider(create: (context) => ProfileCubit(getIt())..getUserProfile()),
           ],
           child: const HomeScreen(),
         ),
@@ -197,6 +200,10 @@ class AppRoutes {
       GoRoute(
         path: addCaregiver,
         builder: (context, state) => const AddCaregiverScreen(),
+      ),
+      GoRoute(
+        path: addMedication,
+        builder: (context, state) => const AddMedicationScreen(),
       ),
     ],
   );

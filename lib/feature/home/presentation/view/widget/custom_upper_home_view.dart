@@ -7,9 +7,7 @@ import 'package:raai/core/utils/styling.dart';
 import 'package:raai/core/widget/app_button_back.dart';
 
 class CustomUpperHomeView extends StatelessWidget {
-  const CustomUpperHomeView({
-    super.key,
-  });
+  const CustomUpperHomeView({super.key});
 
   @override
   Widget build(BuildContext context) {

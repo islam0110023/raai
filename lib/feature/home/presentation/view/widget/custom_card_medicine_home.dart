@@ -6,9 +6,7 @@ import 'package:raai/core/utils/styling.dart';
 import 'package:raai/core/widget/app_button.dart';
 
 class CustomCardMedicineHome extends StatelessWidget {
-  const CustomCardMedicineHome({
-    super.key,
-  });
+  const CustomCardMedicineHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +98,7 @@ class CustomCardMedicineHome extends StatelessWidget {
             ),
           ),
           Container(
-            padding: REdgeInsets.symmetric(horizontal: 16,vertical: 4),
+            padding: REdgeInsets.symmetric(horizontal: 16, vertical: 4),
             decoration: BoxDecoration(
               color: AppColor.primaryNormal,
               borderRadius: BorderRadius.only(
@@ -112,12 +110,12 @@ class CustomCardMedicineHome extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('الان',style: AppTextStyles.s14.w400.white,),
+                Text('الان', style: AppTextStyles.s14.w400.white),
                 const RSizedBox(width: 5),
-                Icon(CupertinoIcons.clock,color: AppColor.white,size: 14.r,)
+                Icon(CupertinoIcons.clock, color: AppColor.white, size: 14.r),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

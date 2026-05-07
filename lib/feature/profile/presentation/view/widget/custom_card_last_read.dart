@@ -91,12 +91,12 @@ class CustomCardLastRead extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.baseline,
               children: [
                 Text(
-                  profile.bloodProfile?.dia.toString() ??'',
+                  profile.bloodProfile?.dia.toString() ?? '',
                   style: AppTextStyles.s20.w600.redNormal,
                 ),
                 Text('  /  ', style: AppTextStyles.s12.w300.textNormal),
                 Text(
-                  profile.bloodProfile?.sys.toString()??'',
+                  profile.bloodProfile?.sys.toString() ?? '',
                   style: AppTextStyles.s20.w600.redNormal,
                 ),
               ],
@@ -110,14 +110,14 @@ class CustomCardLastRead extends StatelessWidget {
               Visibility(
                 visible: isBlood,
                 child: Text(
-                  profile.sugarProfile?.status??'',
+                  profile.sugarProfile?.status ?? '',
                   style: AppTextStyles.s12.w300.textNormal,
                 ),
               ),
               Visibility(
                 visible: !isBlood,
                 child: Text(
-                  profile.bloodProfile?.status??'',
+                  profile.bloodProfile?.status ?? '',
                   style: AppTextStyles.s12.w300.textNormal,
                 ),
               ),

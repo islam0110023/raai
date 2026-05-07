@@ -58,7 +58,7 @@ class CustomUpperProfile extends StatelessWidget {
                     Text(
                       state.profile.status,
                       style: AppTextStyles.s12.w300.textNormal.copyWith(
-                        color: state.profile.trafficColor
+                        color: state.profile.trafficColor,
                       ),
                     ),
                     const RSizedBox(width: 4),
