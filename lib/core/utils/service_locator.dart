@@ -18,14 +18,27 @@ import 'package:raai/feature/auth/domain/use_case/register_use_case.dart';
 import 'package:raai/feature/auth/domain/use_case/reset_pass_use_case.dart';
 import 'package:raai/feature/auth/domain/use_case/select_role_use_case.dart';
 import 'package:raai/feature/auth/presentation/manager/auth_cubit/auth_cubit.dart';
+import 'package:raai/feature/bottom_nav/data/data_source/voice_remote_data_source.dart';
+import 'package:raai/feature/bottom_nav/data/repo/voice_repo_impl.dart';
+import 'package:raai/feature/bottom_nav/domain/repo/voice_repo.dart';
+import 'package:raai/feature/bottom_nav/domain/use_case/analyze_voice_use_case.dart';
 import 'package:raai/feature/chat_bot/data/data_source/chat_bot_remote_data_source.dart';
 import 'package:raai/feature/chat_bot/data/repo/chat_bot_repo_impl.dart';
 import 'package:raai/feature/chat_bot/domain/repo/chat_bot_repo.dart';
 import 'package:raai/feature/chat_bot/domain/use_case/get_messages_use_case.dart';
+import 'package:raai/feature/home/data/data_source/home_remote_data_source.dart';
+import 'package:raai/feature/home/data/repo/home_repo_impl.dart';
+import 'package:raai/feature/home/domain/repo/home_repo.dart';
+import 'package:raai/feature/home/domain/use_case/get_home_data_use_case.dart';
 import 'package:raai/feature/medical_information/data/data_source/medical_remote_data_source.dart';
 import 'package:raai/feature/medical_information/data/repo/medical_repo_impl.dart';
 import 'package:raai/feature/medical_information/domain/repo/medical_repo.dart';
 import 'package:raai/feature/medical_information/domain/use_case/set_medical_use_case.dart';
+import 'package:raai/feature/medication/data/data_source/medication_remote_data_source.dart';
+import 'package:raai/feature/medication/data/repo/medication_repo_impl.dart';
+import 'package:raai/feature/medication/domain/repo/medication_repo.dart';
+import 'package:raai/feature/medication/domain/use_case/create_medication_use_case.dart';
+import 'package:raai/feature/medication/domain/use_case/get_medications_use_case.dart';
 import 'package:raai/feature/models/data/data_source/model_remote_data_source.dart';
 import 'package:raai/feature/models/data/repo/model_repo_impl.dart';
 import 'package:raai/feature/models/domain/repo/model_repo.dart';
@@ -79,6 +92,15 @@ void setUpServices() {
   getIt.registerLazySingleton<ProfileRemoteDataSource>(
     () => ProfileRemoteDataSourceImpl(),
   );
+  getIt.registerLazySingleton<MedicationRemoteDataSource>(
+    () => MedicationRemoteDataSourceImpl(),
+  );
+  getIt.registerLazySingleton<VoiceRemoteDataSource>(
+    () => VoiceRemoteDataSourceImpl(),
+  );
+  getIt.registerLazySingleton<HomeRemoteDataSource>(
+    () => HomeRemoteDataSourceImpl(),
+  );
 
   //Repo
   getIt.registerLazySingleton<ChatBotRepo>(() => ChatBotRepoImpl(getIt()));
@@ -90,6 +112,11 @@ void setUpServices() {
   getIt.registerLazySingleton<ReadRepo>(() => ReadRepoImpl(getIt()));
   getIt.registerLazySingleton<ModelRepo>(() => ModelRepoImpl(getIt()));
   getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepoImpl(getIt()));
+  getIt.registerLazySingleton<MedicationRepo>(
+    () => MedicationRepoImpl(getIt()),
+  );
+  getIt.registerLazySingleton<VoiceRepo>(() => VoiceRepoImpl(getIt()));
+  getIt.registerLazySingleton<HomeRepo>(() => HomeRepoImpl(getIt()));
 
   //UseCase
   getIt.registerLazySingleton<GetMessagesUseCase>(
@@ -142,5 +169,17 @@ void setUpServices() {
   );
   getIt.registerLazySingleton<GetUserProfileUseCase>(
     () => GetUserProfileUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<CreateMedicationUseCase>(
+    () => CreateMedicationUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<GetMedicationsUseCase>(
+    () => GetMedicationsUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<AnalyzeVoiceUseCase>(
+    () => AnalyzeVoiceUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<GetHomeDataUseCase>(
+    () => GetHomeDataUseCase(getIt()),
   );
 }

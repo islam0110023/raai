@@ -9,6 +9,7 @@ class BloodProfileEntity {
     required this.dia,
     required this.status,
     required this.trafficColor,
+    required this.statusColor,
   });
 
   final int userId;
@@ -17,5 +18,7 @@ class BloodProfileEntity {
   final int sys;
   final int dia;
   final String status;
+  final Color statusColor;
   final Color trafficColor;
+
 }

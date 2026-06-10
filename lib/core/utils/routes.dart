@@ -26,6 +26,8 @@ import 'package:raai/feature/chat_bot/presentation/manager/chat_bot_cubit.dart';
 import 'package:raai/feature/medical_information/presentation/manager/medical_info_cubit.dart';
 import 'package:raai/feature/medical_information/presentation/view/confirmation_screen.dart';
 import 'package:raai/feature/medical_information/presentation/view/medical_information_screen.dart';
+import 'package:raai/feature/medication/presenation/manager/add_medication/add_medication_cubit.dart';
+import 'package:raai/feature/medication/presenation/manager/medication_form_cubit.dart';
 import 'package:raai/feature/medication/presenation/view/add_medication_screen.dart';
 import 'package:raai/feature/models/presentation/manager/sugar_daily/sugar_daily_cubit.dart';
 import 'package:raai/feature/models/presentation/manager/sugar_monthly/sugar_monthly_cubit.dart';
@@ -147,8 +149,10 @@ class AppRoutes {
           providers: [
             BlocProvider(create: (context) => BottomNavCubit()),
             BlocProvider(create: (context) => ChatBotCubit(getIt())),
-            BlocProvider(create: (context) => VoiceCubit()),
-            BlocProvider(create: (context) => ProfileCubit(getIt())..getUserProfile()),
+            BlocProvider(create: (context) => VoiceAssistantCubit(getIt())),
+            BlocProvider(
+              create: (context) => ProfileCubit(getIt())..getUserProfile(),
+            ),
           ],
           child: const HomeScreen(),
         ),
@@ -203,7 +207,13 @@ class AppRoutes {
       ),
       GoRoute(
         path: addMedication,
-        builder: (context, state) => const AddMedicationScreen(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => MedicationFormCubit()),
+            BlocProvider(create: (context) => AddMedicationCubit(getIt())),
+          ],
+          child: const AddMedicationScreen(),
+        ),
       ),
     ],
   );

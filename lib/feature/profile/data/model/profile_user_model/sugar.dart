@@ -56,6 +56,7 @@ class Sugar {
       valueMgDl: valueMgDl ?? 0,
       status: status?.toArabicSugarStatus ?? 'غير معرفة',
       trafficColor: status!.trafficColor,
+      statusColor: status!.statusColor,
     );
   }
 }

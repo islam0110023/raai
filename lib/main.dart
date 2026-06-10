@@ -69,6 +69,9 @@ class AppRoot extends StatelessWidget {
           datePickerTheme: const DatePickerThemeData(
             backgroundColor: AppColor.white,
           ),
+          timePickerTheme: const TimePickerThemeData(
+            dialHandColor: AppColor.primaryNormal,
+          ),
           appBarTheme: const AppBarTheme(
             backgroundColor: AppColor.white,
             elevation: 0,

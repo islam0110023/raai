@@ -39,6 +39,22 @@ extension SugarStatusArabic on String {
     }
   }
 
+  Color get statusColor {
+    switch (this) {
+      case 'VERY_LOW':
+      case 'VERY_HIGH':
+        return AppColor.redDarkHover;
+      case 'LOW':
+      case 'HIGH':
+        return AppColor.orangeNormalActive;
+
+      case 'NORMAL':
+        return AppColor.secondaryDarkHover;
+      default:
+        return AppColor.orangeNormalActive;
+    }
+  }
+
   HealthLevel get level {
     switch (this) {
       case 'VERY_LOW':

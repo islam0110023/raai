@@ -170,6 +170,94 @@ abstract class AppConstant {
     return payloadMap;
   }
 
+  static String getArabicPeriod(DateTime? dateTime) {
+    final hour = dateTime?.hour ?? 50;
+
+    if (hour < 12) return 'صباحًا';
+    if (hour < 17) return 'ظهرًا';
+    if (hour < 20) return 'مساءً';
+    return 'ليلًا';
+  }
+
+  static String getRemainingTime(DateTime medicationDate) {
+    final difference = medicationDate.difference(DateTime.now());
+
+    if (difference.isNegative) {
+      return 'انتهى';
+    }
+
+    final hours = difference.inHours;
+    final minutes = difference.inMinutes % 60;
+
+    if (hours > 0) {
+      return '$hoursس $minutesد';
+    }
+
+    return '$minutesد';
+  }
+
+  static String getPeriod(String time) {
+    final hour = int.parse(time.split(':')[0]);
+
+    return hour >= 12 ? 'مساءً' : 'صباحاً';
+  }
+
+  static String formatTime(String time) {
+    final parts = time.split(':');
+
+    int hour = int.parse(parts[0]);
+    final minute = parts[1];
+
+    hour = hour % 12;
+    if (hour == 0) hour = 12;
+
+    return '${hour.toString().padLeft(2, '0')}:$minute';
+  }
+
+  static List<String> generateMedicationTimes({
+    required String startTime,
+    required int dosesPerDay,
+  }) {
+    final parts = startTime.split(':');
+
+    final startMinutes = int.parse(parts[0]) * 60 + int.parse(parts[1]);
+
+    final intervalMinutes = (24 * 60) ~/ dosesPerDay;
+
+    final times = <String>[];
+
+    for (int i = 0; i < dosesPerDay; i++) {
+      final totalMinutes = (startMinutes + (i * intervalMinutes)) % (24 * 60);
+
+      final hour = totalMinutes ~/ 60;
+      final minute = totalMinutes % 60;
+
+      times.add(
+        '${hour.toString().padLeft(2, '0')}:'
+        '${minute.toString().padLeft(2, '0')}',
+      );
+    }
+
+    return times;
+  }
+
+  static String formatArabicTime(String time) {
+    final parts = time.split(':');
+
+    int hour = int.parse(parts[0]);
+    final minute = parts[1];
+
+    final period = hour >= 12 ? 'مساءً' : 'صباحاً';
+
+    hour = hour % 12;
+
+    if (hour == 0) {
+      hour = 12;
+    }
+
+    return '${hour.toString().padLeft(2, '0')}:$minute $period';
+  }
+
   // static int calculateAge(String dateOfBirth) {
   //   try {
   //     final dob = DateFormat('dd/MM/yyyy').parse(dateOfBirth);

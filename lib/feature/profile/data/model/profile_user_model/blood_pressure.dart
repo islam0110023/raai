@@ -61,6 +61,7 @@ class BloodPressure {
       dia: dia ?? 0,
       status: status?.bloodPressureArabicLabel ?? 'غير معرفة',
       trafficColor: status!.bloodPressureTrafficColor,
+      statusColor: status!.bloodPressureStatusColor,
     );
   }
 }

@@ -43,6 +43,22 @@ extension BloodPressureStatusUI on String {
     }
   }
 
+  Color get bloodPressureStatusColor {
+    switch (this) {
+      case 'NORMAL':
+        return AppColor.secondaryDarkHover;
+      case 'LOW':
+      case 'HIGH':
+        return AppColor.orangeNormalActive;
+      case 'VERY_LOW':
+      case 'VERY_HIGH':
+      case 'CRISIS':
+        return AppColor.redDarkHover;
+      default:
+        return AppColor.orangeNormalActive;
+    }
+  }
+
   HealthLevel get level {
     switch (this) {
       case 'NORMAL':

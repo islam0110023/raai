@@ -34,15 +34,15 @@ class SelectModelsScreenBody extends StatelessWidget {
               context.push(AppRoutes.sugarMonthlyModel);
             },
           ),
-          const RSizedBox(height: 16),
-          CustomCardSelectModel(
-            title: 'فحص سكر الدم (يومي)',
-            subtitle: 'متابعه تحاليل السكر',
-            icon: AppIcons.blood,
-            onTap: () {
-              context.push(AppRoutes.sugarDailyModel);
-            },
-          ),
+          // const RSizedBox(height: 16),
+          // CustomCardSelectModel(
+          //   title: 'فحص سكر الدم (يومي)',
+          //   subtitle: 'متابعه تحاليل السكر',
+          //   icon: AppIcons.blood,
+          //   onTap: () {
+          //     context.push(AppRoutes.sugarDailyModel);
+          //   },
+          // ),
           const RSizedBox(height: 16),
 
           // const CustomCardSelectModel(

@@ -1,85 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:raai/core/utils/app_color.dart';
 import 'package:raai/core/utils/app_icons.dart';
-import 'package:raai/core/utils/styling.dart';
+import 'package:raai/feature/medication/data/model/input_medication_model.dart';
+import 'package:raai/feature/medication/presenation/manager/medication_form_cubit.dart';
+import 'package:raai/feature/medication/presenation/view/widget/custom_card_medicine_type.dart';
 
 class CustomRowSelectTypeMedicine extends StatelessWidget {
-  const CustomRowSelectTypeMedicine({
-    super.key,
-  });
+  const CustomRowSelectTypeMedicine({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      spacing: 16.w,
-      children: [
-        Expanded(
-          child: Container(
-            padding: REdgeInsets.symmetric(vertical: 24, horizontal: 12),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(32.r),
-              color: AppColor.primaryNormal,
+    return BlocBuilder<MedicationFormCubit, InputMedicationModel>(
+      builder: (context, state) {
+        return Row(
+          spacing: 16.w,
+          children: [
+            Expanded(
+              child: CustomCardMedicineType(
+                title: 'كبسولات',
+                icon: AppIcons.tablet,
+                isSelected: state.form == 'TABLET',
+                onTap: () {
+                  context.read<MedicationFormCubit>().updateForm('TABLET');
+                },
+              ),
             ),
-            child: Column(
-              children: [
-                SvgPicture.asset(AppIcons.tablet),
-                const RSizedBox(height: 8),
-                Text('كبسولات', style: AppTextStyles.s16.w500.white),
-              ],
+            Expanded(
+              child: CustomCardMedicineType(
+                title: 'حقن',
+                icon: AppIcons.injectionMedicine,
+                isSelected: state.form == 'INJECTION',
+                onTap: () {
+                  context.read<MedicationFormCubit>().updateForm('INJECTION');
+                },
+              ),
             ),
-          ),
-        ),
-        Expanded(
-          child: Container(
-            padding: REdgeInsets.symmetric(vertical: 24, horizontal: 12),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(32.r),
-              color: AppColor.white,
-              boxShadow: const [
-                BoxShadow(
-                  color: AppColor.shadowColor,
-                  blurRadius: 3,
-                  offset: Offset(0, 0),
-                  spreadRadius: 3,
-                ),
-              ],
+            Expanded(
+              child: CustomCardMedicineType(
+                title: 'شرب',
+                icon: AppIcons.waterMedicine,
+                isSelected: state.form == 'SYRUP',
+                onTap: () {
+                  context.read<MedicationFormCubit>().updateForm('SYRUP');
+                },
+              ),
             ),
-            child: Column(
-              children: [
-                SvgPicture.asset(AppIcons.injectionMedicine),
-                const RSizedBox(height: 8),
-                Text('حقن', style: AppTextStyles.s16.w500.black),
-              ],
-            ),
-          ),
-        ),
-        Expanded(
-          child: Container(
-            padding: REdgeInsets.symmetric(vertical: 24, horizontal: 12),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(32.r),
-              color: AppColor.white,
-              boxShadow: const [
-                BoxShadow(
-                  color: AppColor.shadowColor,
-                  blurRadius: 3,
-                  offset: Offset(0, 0),
-                  spreadRadius: 3,
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                SvgPicture.asset(AppIcons.waterMedicine),
-                const RSizedBox(height: 8),
-                Text('شرب', style: AppTextStyles.s16.w500.black),
-              ],
-            ),
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 }

@@ -8,6 +8,7 @@ class SugarProfileEntity {
     required this.valueMgDl,
     required this.status,
     required this.trafficColor,
+    required this.statusColor,
   });
 
   final int id;
@@ -15,5 +16,7 @@ class SugarProfileEntity {
   final String idCard;
   final int valueMgDl;
   final String status;
+  final Color statusColor;
+
   final Color trafficColor;
 }

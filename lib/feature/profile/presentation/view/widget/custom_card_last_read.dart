@@ -78,7 +78,9 @@ class CustomCardLastRead extends StatelessWidget {
                 Text('mg/dL ', style: AppTextStyles.s12.w300.textNormal),
                 Text(
                   profile.sugarProfile!.valueMgDl.toString(),
-                  style: AppTextStyles.s20.w600.redNormal,
+                  style: AppTextStyles.s20.w600.redNormal.copyWith(
+                    color: profile.sugarProfile?.statusColor,
+                  ),
                 ),
               ],
             ),
@@ -92,12 +94,16 @@ class CustomCardLastRead extends StatelessWidget {
               children: [
                 Text(
                   profile.bloodProfile?.dia.toString() ?? '',
-                  style: AppTextStyles.s20.w600.redNormal,
+                  style: AppTextStyles.s20.w600.redNormal.copyWith(
+                    color: profile.bloodProfile?.statusColor,
+                  ),
                 ),
                 Text('  /  ', style: AppTextStyles.s12.w300.textNormal),
                 Text(
                   profile.bloodProfile?.sys.toString() ?? '',
-                  style: AppTextStyles.s20.w600.redNormal,
+                  style: AppTextStyles.s20.w600.redNormal.copyWith(
+                    color: profile.bloodProfile?.statusColor,
+                  ),
                 ),
               ],
             ),

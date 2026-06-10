@@ -55,9 +55,6 @@ class AppIcons {
   static const tablet = 'assets/icons/tablet_icon.svg';
   static const waterMedicine = 'assets/icons/water_medicine.svg';
   static const injectionMedicine = 'assets/icons/injection_medicine.svg';
-
-
-
-
-
+  static const syrupMedicine = 'assets/icons/syrup.svg';
+  static const tabletMedicine = 'assets/icons/tablet.svg';
 }

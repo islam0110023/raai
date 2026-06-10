@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:raai/core/utils/app_color.dart';
 import 'package:raai/core/utils/app_icons.dart';
+import 'package:raai/core/utils/routes.dart';
 import 'package:raai/core/utils/styling.dart';
 import 'package:raai/core/widget/app_button.dart';
 
@@ -48,7 +50,9 @@ class CustomLayoutInHomeView extends StatelessWidget {
                           ],
                         ),
                         isWidget: true,
-                        onPressed: () {},
+                        onPressed: () {
+                          context.push(AppRoutes.addMedication);
+                        },
                       ),
                     ),
                     Expanded(
@@ -76,7 +80,9 @@ class CustomLayoutInHomeView extends StatelessWidget {
                           ],
                         ),
                         isWidget: true,
-                        onPressed: () {},
+                        onPressed: () {
+                          context.push(AppRoutes.addReads, extra: true);
+                        },
                       ),
                     ),
                   ],
@@ -110,7 +116,9 @@ class CustomLayoutInHomeView extends StatelessWidget {
                           ],
                         ),
                         isWidget: true,
-                        onPressed: () {},
+                        onPressed: () {
+                          context.push(AppRoutes.selectModels);
+                        },
                       ),
                     ),
                     Expanded(
@@ -139,7 +147,9 @@ class CustomLayoutInHomeView extends StatelessWidget {
                           ],
                         ),
                         isWidget: true,
-                        onPressed: () {},
+                        onPressed: () {
+                          context.push(AppRoutes.addCaregiver);
+                        },
                       ),
                     ),
                   ],

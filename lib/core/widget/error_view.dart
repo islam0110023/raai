@@ -9,8 +9,14 @@ import 'package:raai/core/widget/app_button.dart';
 import 'package:raai/core/widget/app_button_back.dart';
 
 class ErrorView extends StatelessWidget {
-  const ErrorView({super.key, this.onPressed, this.isExpanded = false});
+  const ErrorView({
+    super.key,
+    this.onPressed,
+    this.isExpanded = false,
+    this.message,
+  });
   final VoidCallback? onPressed;
+  final String? message;
   final bool isExpanded;
 
   @override
@@ -43,7 +49,7 @@ class ErrorView extends StatelessWidget {
           Padding(
             padding: REdgeInsets.symmetric(horizontal: 26),
             child: Text(
-              'حصلت مشكلة أثناء تنفيذ الطلب، حاول مرة أخرى',
+              message ?? 'حصلت مشكلة أثناء تنفيذ الطلب، حاول مرة أخرى',
               style: AppTextStyles.s16.w500.textNormal,
               textAlign: TextAlign.center,
             ),

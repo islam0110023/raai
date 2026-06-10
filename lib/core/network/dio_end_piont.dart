@@ -30,4 +30,8 @@ class Endpoints {
   static String getSugarMonthly = merge('/api/api/v1/ai/diabetes-month');
   static String getSugarDaily = merge('/api/api/v1/ai/diabetes-daily');
   static String getUserProfile = merge('/api/api/v1/users/profile');
+  static String addMedication = merge('/api/api/v1/medications');
+  static String getMedications = merge('/api/api/v1/medications');
+  static String analyzeVoice = merge('/ai/voice-assistant/message');
+  static String getHomeData = merge('/api/api/v1/home');
 }

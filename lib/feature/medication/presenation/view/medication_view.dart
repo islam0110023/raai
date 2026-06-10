@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:raai/core/utils/service_locator.dart';
+import 'package:raai/feature/medication/presenation/manager/medications_data/medications_data_cubit.dart';
 import 'package:raai/feature/medication/presenation/view/widget/medication_view_body.dart';
 
 class MedicationView extends StatelessWidget {
@@ -6,6 +9,9 @@ class MedicationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MedicationViewBody();
+    return BlocProvider(
+      create: (context) => MedicationsDataCubit(getIt()),
+      child: const MedicationViewBody(),
+    );
   }
 }

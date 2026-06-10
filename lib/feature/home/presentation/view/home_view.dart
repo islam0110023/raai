@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:raai/core/utils/service_locator.dart';
+import 'package:raai/feature/home/presentation/manager/home_data/home_data_cubit.dart';
 import 'package:raai/feature/home/presentation/view/widget/home_view_body.dart';
 
 class HomeView extends StatelessWidget {
@@ -6,6 +9,9 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const HomeViewBody();
+    return BlocProvider(
+      create: (context) => HomeDataCubit(getIt()),
+      child: const HomeViewBody(),
+    );
   }
 }
