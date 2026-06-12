@@ -13,6 +13,7 @@ class ProfileUserEntity {
     required this.status,
     required this.trafficColor,
     required this.trafficBackgroundColor,
+    required this.elderCode,
   });
 
   final HealthProfileEntity healthProfile;
@@ -22,4 +23,5 @@ class ProfileUserEntity {
   final String status;
   final Color trafficColor;
   final Color trafficBackgroundColor;
+  final String elderCode;
 }

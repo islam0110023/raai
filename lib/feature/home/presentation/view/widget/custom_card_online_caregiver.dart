@@ -6,6 +6,7 @@ import 'package:raai/core/utils/asset_image.dart';
 import 'package:raai/core/utils/styling.dart';
 import 'package:raai/core/widget/app_button.dart';
 import 'package:raai/feature/home/presentation/manager/home_data/home_data_cubit.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomCardOnlineCaregiver extends StatelessWidget {
   const CustomCardOnlineCaregiver({super.key});
@@ -67,7 +68,15 @@ class CustomCardOnlineCaregiver extends StatelessWidget {
               ),
               trailing: AppButton.filled(
                 text: 'الاتصال',
-                onPressed: () {},
+                onPressed: () async {
+                  try {
+                    await launchUrl(
+                      Uri.parse('tel:${state.homeData.caregiverPhone}'),
+                    );
+                  } catch (e) {
+                    debugPrint(e.toString());
+                  }
+                },
                 width: 70.h,
                 isOutlineColor: false,
                 textStyle: AppTextStyles.s12.w300.secondaryLightHover,

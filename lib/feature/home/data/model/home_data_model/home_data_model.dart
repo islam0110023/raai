@@ -4,6 +4,7 @@ import 'package:raai/feature/home/data/model/home_data_model/caregiver.dart';
 import 'package:raai/feature/home/data/model/home_data_model/last_readings.dart';
 import 'package:raai/feature/home/data/model/home_data_model/next_medication.dart';
 import 'package:raai/feature/home/domain/entities/home_data_entity.dart';
+import 'package:raai/feature/medication/data/model/medication_data_model/medication_status.dart';
 import 'package:raai/feature/profile/data/model/profile_user_model/ovarall_health.dart';
 
 class HomeDataModel {
@@ -58,25 +59,31 @@ class HomeDataModel {
         sugar: lastReadings?.sugar?.status,
         blood: lastReadings?.bloodPressure?.status,
       ).overallBackgroundColor,
-      medicationId: nextMedication?.id,
+      medicationId: nextMedication?.medicationId,
       medicationName: nextMedication?.name,
       medicationImage: nextMedication?.image,
-      medicationTime: nextMedication?.time == null
+      medicationTime: nextMedication?.scheduledTime == null
           ? '--:--'
-          : DateFormat(
-              'hh:mm',
-              'en',
-            ).format(DateTime.parse(nextMedication!.time.toString()).toLocal()),
-      medicationPeriod: nextMedication?.time == null
+          : DateFormat('hh:mm', 'en').format(
+              DateTime.parse(
+                nextMedication!.scheduledTime.toString(),
+              ).toLocal(),
+            ),
+      medicationPeriod: nextMedication?.scheduledTime == null
           ? ''
           : AppConstant.getArabicPeriod(
-              DateTime.parse(nextMedication!.time.toString()).toLocal(),
+              DateTime.parse(
+                nextMedication!.scheduledTime.toString(),
+              ).toLocal(),
             ),
-      medicationTimeDifference: nextMedication?.time == null
+      medicationTimeDifference: nextMedication?.scheduledTime == null
           ? null
-          : DateTime.parse(nextMedication!.time.toString()).toLocal(),
+          : DateTime.parse(nextMedication!.scheduledTime.toString()).toLocal(),
       caregiverName: caregiver?.name,
       caregiverId: caregiver?.id,
+      caregiverPhone: caregiver?.phone,
+      pillsPerDose: nextMedication?.schedule?.pillsPerDose,
+      form: nextMedication?.form?.medicationTypeArabicLabel ?? 'كبسولة',
     );
   }
 }

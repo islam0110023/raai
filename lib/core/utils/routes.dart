@@ -20,6 +20,11 @@ import 'package:raai/feature/bottom_nav/presentation/manager/bottom_nav_cubit.da
 import 'package:raai/feature/bottom_nav/presentation/manager/voice_cubit/voice_cubit.dart';
 import 'package:raai/feature/bottom_nav/presentation/view/coming_soon.dart';
 import 'package:raai/feature/bottom_nav/presentation/view/home_screen.dart';
+import 'package:raai/feature/caregiver/connect_elder_caregiver/presentation/manager/connect_elder_caregiver/connect_elder_caregiver_cubit.dart';
+import 'package:raai/feature/caregiver/connect_elder_caregiver/presentation/view/connect_elder_caregiver_screen.dart';
+import 'package:raai/feature/caregiver/home_caregiver/presentation/manager/bottom_nav_caregiver_cubit.dart';
+import 'package:raai/feature/caregiver/home_caregiver/presentation/view/bottom_nav_bar_caregiver.dart';
+import 'package:raai/feature/caregivers/presentation/manager/caregiver_list/caregiver_list_cubit.dart';
 import 'package:raai/feature/caregivers/presentation/view/add_caregiver_screen.dart';
 import 'package:raai/feature/caregivers/presentation/view/caregivers_list_screen.dart';
 import 'package:raai/feature/chat_bot/presentation/manager/chat_bot_cubit.dart';
@@ -66,6 +71,8 @@ class AppRoutes {
   static const caregiverList = '/caregiver-list';
   static const addCaregiver = '/add-caregiver';
   static const addMedication = '/add-medication';
+  static const homeScreenCaregiver = '/home-screen-caregiver';
+  static const connectElderCaregiver = '/connect-elder-caregiver';
 
   static final route = GoRouter(
     navigatorKey: navigatorKey,
@@ -199,7 +206,10 @@ class AppRoutes {
       ),
       GoRoute(
         path: caregiverList,
-        builder: (context, state) => const CaregiversListScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => CaregiverListCubit(getIt()),
+          child: const CaregiversListScreen(),
+        ),
       ),
       GoRoute(
         path: addCaregiver,
@@ -213,6 +223,22 @@ class AppRoutes {
             BlocProvider(create: (context) => AddMedicationCubit(getIt())),
           ],
           child: const AddMedicationScreen(),
+        ),
+      ),
+      GoRoute(
+        path: homeScreenCaregiver,
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => BottomNavCaregiverCubit()),
+          ],
+          child: const BottomNavBarCaregiver(),
+        ),
+      ),
+      GoRoute(
+        path: connectElderCaregiver,
+        builder: (context, state) => BlocProvider(
+          create: (context) => ConnectElderCaregiverCubit(getIt()),
+          child: const ConnectElderCaregiverScreen(),
         ),
       ),
     ],

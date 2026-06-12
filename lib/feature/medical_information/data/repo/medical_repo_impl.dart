@@ -10,12 +10,16 @@ class MedicalRepoImpl extends MedicalRepo {
   MedicalRepoImpl(this.remoteDataSource);
   final MedicalRemoteDataSource remoteDataSource;
   @override
-  Future<Either<ApiFailure, Unit>> setMedical({
+  Future<Either<ApiFailure, int>> setMedical({
     required Map<String, dynamic> data,
+    int? elderId,
   }) async {
     try {
-      await remoteDataSource.setMedical(data: data);
-      return right(unit);
+      final result = await remoteDataSource.setMedical(
+        data: data,
+        elderId: elderId,
+      );
+      return right(result);
     } on DioException catch (e) {
       final data = e.response?.data;
 

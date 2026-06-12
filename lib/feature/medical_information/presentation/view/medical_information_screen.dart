@@ -6,6 +6,7 @@ import 'package:raai/core/utils/constants.dart';
 import 'package:raai/core/utils/routes.dart';
 import 'package:raai/core/widget/app_button.dart';
 import 'package:raai/core/widget/show_animated_top_snack_bar.dart';
+import 'package:raai/feature/caregiver/home_caregiver/domain/entity/home_caregiver_elder_data_entity.dart';
 import 'package:raai/feature/medical_information/presentation/manager/medical_info_cubit.dart';
 import 'package:raai/feature/medical_information/presentation/view/widget/medical_information_screen_body.dart';
 
@@ -73,7 +74,13 @@ class MedicalInformationScreen extends StatelessWidget {
                       );
                     }
                   } else {
-                    controller.setMedical();
+                    final extra = GoRouterState.of(context).extra;
+                    final data = extra as HomeCaregiverElderDataEntity?;
+                    if (data != null) {
+                      controller.setMedical(data.id);
+                    } else {
+                      controller.setMedical();
+                    }
                   }
                 },
               ),
@@ -90,7 +97,11 @@ class MedicalInformationScreen extends StatelessWidget {
                     message: 'تم حفظ البيانات بنجاح',
                     subMessage: 'تم اكمال جميع الخطوات',
                   );
-                  context.go(AppRoutes.confirmationScreen);
+                  if (state.appCode == 416) {
+                    context.go(AppRoutes.confirmationScreen);
+                  } else {
+                    context.go(AppRoutes.homeScreenCaregiver);
+                  }
                 }
                 if (state is MedicalInfoFailure) {
                   if (Navigator.of(context, rootNavigator: true).canPop()) {

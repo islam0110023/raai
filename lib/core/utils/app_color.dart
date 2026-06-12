@@ -97,4 +97,7 @@ abstract class AppColor {
 
   static const Color white = Colors.white;
   static const Color black = Colors.black;
+  static const Color brownDarker = Color(0xff5D4300);
+  static const Color brownLightHover = Color(0x4dFFDFA0);
+  static const Color brownLightActive = Color(0xa15D4300);
 }

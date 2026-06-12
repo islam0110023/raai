@@ -1,5 +1,4 @@
 class BloodPressure {
-
   factory BloodPressure.fromJson(Map<String, dynamic> json) => BloodPressure(
     systolic: json['systolic'] as int?,
     diastolic: json['diastolic'] as int?,

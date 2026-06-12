@@ -65,7 +65,7 @@ class _CustomCardCaregiversListState extends State<CustomCardCaregiversList>
                     backgroundColor: AppColor.secondaryNormal,
                   ),
                 const RSizedBox(width: 10),
-                Image.asset(AppImage.avatarFemale, width: 48.r, height: 48.r),
+                Image.asset(AppImage.avatarMale, width: 48.r, height: 48.r),
               ],
             ),
             title: Padding(
@@ -82,14 +82,14 @@ class _CustomCardCaregiversListState extends State<CustomCardCaregiversList>
                     text: widget.subtitle,
                     style: AppTextStyles.s12.w300.subTextNormal,
                   ),
-                  TextSpan(
-                    text: ' - ',
-                    style: AppTextStyles.s12.w300.subTextNormal,
-                  ),
-                  TextSpan(
-                    text: widget.status,
-                    style: AppTextStyles.s12.w300.subTextNormal,
-                  ),
+                  // TextSpan(
+                  //   text: ' - ',
+                  //   style: AppTextStyles.s12.w300.subTextNormal,
+                  // ),
+                  // TextSpan(
+                  //   text: widget.status,
+                  //   style: AppTextStyles.s12.w300.subTextNormal,
+                  // ),
                 ],
               ),
             ),

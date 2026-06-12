@@ -58,7 +58,7 @@ class SelectRoleScreenBody extends StatelessWidget {
                   context.push(AppRoutes.medicalInfo);
                 }
                 if (state.entity.appCode == 411) {
-                  context.push(AppRoutes.camingSoon);
+                  context.push(AppRoutes.homeScreenCaregiver);
                 }
               }
               if (state is SelectRoleFailure) {

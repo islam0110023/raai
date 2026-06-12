@@ -13,6 +13,9 @@ class HomeDataEntity {
     this.medicationTimeDifference,
     this.caregiverName,
     this.caregiverId,
+    this.pillsPerDose,
+    this.form,
+    this.caregiverPhone,
   });
 
   final String status;
@@ -26,4 +29,7 @@ class HomeDataEntity {
   final DateTime? medicationTimeDifference;
   final String? caregiverName;
   final int? caregiverId;
+  final String? caregiverPhone;
+  final int? pillsPerDose;
+  final String? form;
 }

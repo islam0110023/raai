@@ -22,6 +22,22 @@ import 'package:raai/feature/bottom_nav/data/data_source/voice_remote_data_sourc
 import 'package:raai/feature/bottom_nav/data/repo/voice_repo_impl.dart';
 import 'package:raai/feature/bottom_nav/domain/repo/voice_repo.dart';
 import 'package:raai/feature/bottom_nav/domain/use_case/analyze_voice_use_case.dart';
+import 'package:raai/feature/caregiver/connect_elder_caregiver/data/data_source/connect_elder_caregiver_remote_data_source.dart';
+import 'package:raai/feature/caregiver/connect_elder_caregiver/data/repo/connect_elder_caregiver_repo_impl.dart';
+import 'package:raai/feature/caregiver/connect_elder_caregiver/domain/repo/connect_elder_caregiver_repo.dart';
+import 'package:raai/feature/caregiver/connect_elder_caregiver/domain/use_case/connect_caregiver_with_elder_use_case.dart';
+import 'package:raai/feature/caregiver/home_caregiver/data/data_source/home_caregiver_remote_data_source.dart';
+import 'package:raai/feature/caregiver/home_caregiver/data/repo/home_caregiver_repo_impl.dart';
+import 'package:raai/feature/caregiver/home_caregiver/domain/repo/home_caregiver_repo.dart';
+import 'package:raai/feature/caregiver/home_caregiver/domain/use_case/get_home_caregiver_data_use_case.dart';
+import 'package:raai/feature/caregiver/profile_caregiver/data/data_source/profile_caregiver_remote_data_source.dart';
+import 'package:raai/feature/caregiver/profile_caregiver/data/repo/profile_caregiver_repo_impl.dart';
+import 'package:raai/feature/caregiver/profile_caregiver/domain/repo/profile_caregiver_repo.dart';
+import 'package:raai/feature/caregiver/profile_caregiver/domain/use_case/get_profile_caregiver_data_use_case.dart';
+import 'package:raai/feature/caregivers/data/data_source/caregiver_remote_data_source.dart';
+import 'package:raai/feature/caregivers/data/repo/caregiver_repo_impl.dart';
+import 'package:raai/feature/caregivers/domain/repo/caregiver_repo.dart';
+import 'package:raai/feature/caregivers/domain/use_case/get_caregiver_list_use_case.dart';
 import 'package:raai/feature/chat_bot/data/data_source/chat_bot_remote_data_source.dart';
 import 'package:raai/feature/chat_bot/data/repo/chat_bot_repo_impl.dart';
 import 'package:raai/feature/chat_bot/domain/repo/chat_bot_repo.dart';
@@ -101,6 +117,18 @@ void setUpServices() {
   getIt.registerLazySingleton<HomeRemoteDataSource>(
     () => HomeRemoteDataSourceImpl(),
   );
+  getIt.registerLazySingleton<HomeCaregiverRemoteDataSource>(
+    () => HomeCaregiverRemoteDataSourceImpl(),
+  );
+  getIt.registerLazySingleton<ProfileCaregiverRemoteDataSource>(
+    () => ProfileCaregiverRemoteDataSourceImpl(),
+  );
+  getIt.registerLazySingleton<ConnectElderCaregiverRemoteDataSource>(
+    () => ConnectElderCaregiverRemoteDataSourceImpl(),
+  );
+  getIt.registerLazySingleton<CaregiverRemoteDataSource>(
+    () => CaregiverRemoteDataSourceImpl(),
+  );
 
   //Repo
   getIt.registerLazySingleton<ChatBotRepo>(() => ChatBotRepoImpl(getIt()));
@@ -117,6 +145,17 @@ void setUpServices() {
   );
   getIt.registerLazySingleton<VoiceRepo>(() => VoiceRepoImpl(getIt()));
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepoImpl(getIt()));
+  getIt.registerLazySingleton<HomeCaregiverRepo>(
+    () => HomeCaregiverRepoImpl(getIt()),
+  );
+  getIt.registerLazySingleton<ProfileCaregiverRepo>(
+    () => ProfileCaregiverRepoImpl(getIt()),
+  );
+  getIt.registerLazySingleton<ConnectElderCaregiverRepo>(
+    () => ConnectElderCaregiverRepoImpl(getIt()),
+  );
+  getIt.registerLazySingleton<CaregiverRepo>(() => CaregiverRepoImpl(getIt()));
+
 
   //UseCase
   getIt.registerLazySingleton<GetMessagesUseCase>(
@@ -181,5 +220,17 @@ void setUpServices() {
   );
   getIt.registerLazySingleton<GetHomeDataUseCase>(
     () => GetHomeDataUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<GetHomeCaregiverDataUseCase>(
+    () => GetHomeCaregiverDataUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<GetProfileCaregiverDataUseCase>(
+    () => GetProfileCaregiverDataUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<ConnectCaregiverWithElderUseCase>(
+    () => ConnectCaregiverWithElderUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<GetCaregiverListUseCase>(
+    () => GetCaregiverListUseCase(getIt()),
   );
 }

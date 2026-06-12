@@ -1,26 +1,50 @@
-class NextMedication {
+import 'schedule.dart';
 
+class NextMedication {
   factory NextMedication.fromJson(Map<String, dynamic> json) {
     return NextMedication(
-      id: json['id'] as int?,
+      doseId: json['doseId'] as int?,
+      medicationId: json['medicationId'] as int?,
       name: json['name'] as String?,
+      category: json['category'] as String?,
+      form: json['form'] as dynamic,
       image: json['image'] as dynamic,
-      time: json['time'] == null
+      scheduledTime: json['scheduledTime'] == null
           ? null
-          : DateTime.parse(json['time'] as String),
+          : DateTime.parse(json['scheduledTime'] as String),
+      schedule: json['schedule'] == null
+          ? null
+          : Schedule.fromJson(json['schedule'] as Map<String, dynamic>),
     );
   }
 
-  NextMedication({this.id, this.name, this.image, this.time});
-  int? id;
+  NextMedication({
+    this.doseId,
+    this.medicationId,
+    this.name,
+    this.category,
+    this.form,
+    this.image,
+    this.scheduledTime,
+    this.schedule,
+  });
+  int? doseId;
+  int? medicationId;
   String? name;
-  dynamic image;
-  DateTime? time;
+  String? category;
+  String? form;
+  String? image;
+  DateTime? scheduledTime;
+  Schedule? schedule;
 
   Map<String, dynamic> toJson() => {
-    'id': id,
+    'doseId': doseId,
+    'medicationId': medicationId,
     'name': name,
+    'category': category,
+    'form': form,
     'image': image,
-    'time': time?.toIso8601String(),
+    'scheduledTime': scheduledTime?.toIso8601String(),
+    'schedule': schedule?.toJson(),
   };
 }

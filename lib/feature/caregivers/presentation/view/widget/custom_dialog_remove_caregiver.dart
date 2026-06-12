@@ -6,9 +6,11 @@ import 'package:raai/core/utils/app_color.dart';
 import 'package:raai/core/utils/app_icons.dart';
 import 'package:raai/core/utils/styling.dart';
 import 'package:raai/core/widget/app_button.dart';
+import 'package:raai/feature/caregivers/domain/entity/caregiver_list_entity.dart';
 
 class CustomDialogRemoveCaregiver extends StatelessWidget {
-  const CustomDialogRemoveCaregiver({super.key});
+  const CustomDialogRemoveCaregiver({super.key, required this.data});
+  final CaregiverListEntity data;
 
   @override
   Widget build(BuildContext context) {

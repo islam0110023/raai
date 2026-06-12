@@ -1,5 +1,4 @@
 class Sugar {
-
   Sugar({this.value, this.status, this.recordedAt});
 
   factory Sugar.fromJson(Map<String, dynamic> json) => Sugar(

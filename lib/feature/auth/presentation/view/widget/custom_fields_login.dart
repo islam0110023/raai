@@ -108,7 +108,7 @@ class CustomFieldsLogin extends StatelessWidget {
                       message: 'انطلق',
                       subMessage: message,
                     );
-                    context.go(AppRoutes.camingSoon);
+                    context.go(AppRoutes.homeScreenCaregiver);
                   }
                 });
               }

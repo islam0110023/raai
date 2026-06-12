@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:raai/core/utils/app_color.dart';
 
@@ -8,10 +9,11 @@ class CustomShowQrCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final elderCode = GoRouterState.of(context).extra ?? '' as String?;
     return Stack(
       alignment: Alignment.center,
       children: [
-        QrImageView(data: 'RAEY-7F92', size: 200.r, version: QrVersions.auto),
+        QrImageView(data: elderCode.toString(), size: 200.r, version: QrVersions.auto),
         CustomPaint(size: Size(230.r, 230.r), painter: QRBorderPainter()),
       ],
     );

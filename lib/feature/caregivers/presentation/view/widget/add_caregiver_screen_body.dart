@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:raai/core/utils/app_color.dart';
 import 'package:raai/core/utils/app_icons.dart';
 import 'package:raai/core/utils/styling.dart';
@@ -15,6 +16,8 @@ class AddCaregiverScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final elderCode = GoRouterState.of(context).extra ?? '' as String?;
+
     return Padding(
       padding: REdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -70,10 +73,15 @@ class AddCaregiverScreenBody extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('RAEY-7F92', style: AppTextStyles.s14.w400.subTextNormal),
+                Text(
+                  elderCode.toString(),
+                  style: AppTextStyles.s14.w400.subTextNormal,
+                ),
                 IconButton(
                   onPressed: () {
-                    Clipboard.setData(const ClipboardData(text: 'RAEY-7F92'));
+                    Clipboard.setData(
+                      ClipboardData(text: elderCode.toString()),
+                    );
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Row(
@@ -120,7 +128,10 @@ class AddCaregiverScreenBody extends StatelessWidget {
             text: 'المشاركه',
             onPressed: () {
               SharePlus.instance.share(
-                ShareParams(text: 'RAEY-7F92', subject: 'RAEY-7F92'),
+                ShareParams(
+                  text: elderCode.toString(),
+                  subject: elderCode.toString(),
+                ),
               );
             },
           ),

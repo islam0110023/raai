@@ -99,6 +99,42 @@ abstract class AppConstant {
     return 'اخر اضافه : $fullDate $time';
   }
 
+  static String getLastSeen(DateTime date) {
+    final lastActivity = date.toLocal();
+    final diff = DateTime.now().difference(lastActivity);
+
+    if (diff.inSeconds < 60) {
+      return 'آخر تحديث: الآن';
+    }
+
+    if (diff.inMinutes < 60) {
+      final m = diff.inMinutes;
+
+      if (m == 1) return 'آخر تحديث: منذ دقيقة';
+      if (m == 2) return 'آخر تحديث: منذ دقيقتين';
+      if (m <= 10) return 'آخر تحديث: منذ $m دقائق';
+
+      return 'آخر تحديث: منذ $m دقيقة';
+    }
+
+    if (diff.inHours < 24) {
+      final h = diff.inHours;
+
+      if (h == 1) return 'آخر تحديث: منذ ساعة';
+      if (h == 2) return 'آخر تحديث: منذ ساعتين';
+      if (h <= 10) return 'آخر تحديث: منذ $h ساعات';
+
+      return 'آخر تحديث: منذ $h ساعة';
+    }
+
+    final d = diff.inDays;
+
+    if (d == 1) return 'آخر تحديث: منذ يوم';
+    if (d == 2) return 'آخر تحديث: منذ يومين';
+    if (d <= 10) return 'آخر تحديث: منذ $d أيام';
+
+    return 'آخر تحديث: منذ $d يوم';
+  }
   // static ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
   // buildShowSnackBar(
   //   BuildContext context,

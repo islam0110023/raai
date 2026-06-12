@@ -93,14 +93,14 @@ class CustomCardMedicineHome extends StatelessWidget {
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: '1 ',
+                                    text: '${state.homeData.pillsPerDose} ',
                                     style: AppTextStyles
                                         .s14
                                         .w400
                                         .secondaryDarkHover,
                                   ),
                                   TextSpan(
-                                    text: 'كبسولة',
+                                    text: state.homeData.form,
                                     style: AppTextStyles.s14.w400.textNormal,
                                   ),
                                 ],

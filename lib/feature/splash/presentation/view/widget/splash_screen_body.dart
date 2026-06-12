@@ -76,7 +76,7 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
 
     if (!mounted) return;
     if (isCaregiverLoggedIn == true) {
-      context.go(AppRoutes.camingSoon);
+      context.go(AppRoutes.homeScreenCaregiver);
       return;
     }
 

@@ -5,7 +5,12 @@ import 'package:raai/feature/profile/data/model/profile_user_model/personal_data
 import 'package:raai/feature/profile/domain/entity/profile_user_entity.dart';
 
 class ProfileUserModel {
-  ProfileUserModel({this.personalData, this.healthProfile, this.lastReadings});
+  ProfileUserModel({
+    this.personalData,
+    this.healthProfile,
+    this.lastReadings,
+    this.elderCode,
+  });
 
   factory ProfileUserModel.fromJson(Map<String, dynamic> json) {
     return ProfileUserModel(
@@ -20,11 +25,13 @@ class ProfileUserModel {
       lastReadings: json['lastReadings'] == null
           ? null
           : LastReadings.fromJson(json['lastReadings'] as Map<String, dynamic>),
+      elderCode: json['elderCode'] as String?,
     );
   }
   PersonalData? personalData;
   HealthProfile? healthProfile;
   LastReadings? lastReadings;
+  String? elderCode;
 
   Map<String, dynamic> toJson() => {
     'personalData': personalData?.toJson(),
@@ -49,6 +56,7 @@ class ProfileUserModel {
         sugar: lastReadings?.sugar?.status,
         blood: lastReadings?.bloodPressure?.status,
       ).overallBackgroundColor,
+      elderCode: elderCode ?? '',
     );
   }
 }

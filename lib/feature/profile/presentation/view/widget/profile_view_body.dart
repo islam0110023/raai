@@ -61,7 +61,15 @@ class ProfileViewBody extends StatelessWidget {
                 title: 'المرافقيين',
                 index: 1,
                 onTap: () {
-                  context.push(AppRoutes.caregiverList);
+                  context.push(
+                    AppRoutes.caregiverList,
+                    extra:
+                        context
+                            .read<ProfileCubit>()
+                            .profileUserEntity
+                            ?.elderCode ??
+                        '',
+                  );
                 },
               ),
               ItemsProfileModel(

@@ -17,4 +17,5 @@ class AppImage {
   static const error1 = 'assets/images/error 1.png';
   static const medicinePlaceholder =
       'assets/images/5b7e83bda80a3636df2f5ec94ca87f5b762f9ecb.png';
+  static const qrCode = 'assets/images/qr_code.png';
 }

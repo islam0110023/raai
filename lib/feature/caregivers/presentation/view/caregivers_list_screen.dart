@@ -17,7 +17,10 @@ class CaregiversListScreen extends StatelessWidget {
         child: AppButton.filled(
           text: 'ربط مرافق جديد',
           onPressed: () {
-            context.push(AppRoutes.addCaregiver);
+            context.push(
+              AppRoutes.addCaregiver,
+              extra: GoRouterState.of(context).extra ?? '' as String?,
+            );
           },
         ),
       ),

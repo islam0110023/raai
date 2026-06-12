@@ -24,9 +24,12 @@ class MedicalInfoCubit extends Cubit<MedicalInfoState> {
   }
 
   int count = 0;
-  void setMedical() async {
+  void setMedical([int? elderId]) async {
     emit(MedicalInfoLoading());
-    final result = await setMedicalUseCase(data: buildRequestJson());
+    final result = await setMedicalUseCase(
+      data: buildRequestJson(),
+      elderId: elderId,
+    );
     result.fold(
       (failure) {
         final message = ApiErrorMapper.getArabicMessage(failure.appCode);
@@ -34,7 +37,7 @@ class MedicalInfoCubit extends Cubit<MedicalInfoState> {
         emit(MedicalInfoFailure(message, failure.appCode));
       },
       (success) {
-        emit(MedicalInfoSuccess());
+        emit(MedicalInfoSuccess(appCode: success));
       },
     );
   }

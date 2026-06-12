@@ -7,7 +7,10 @@ final class MedicalInfoInitial extends MedicalInfoState {}
 
 final class MedicalInfoLoading extends MedicalInfoState {}
 
-final class MedicalInfoSuccess extends MedicalInfoState {}
+final class MedicalInfoSuccess extends MedicalInfoState {
+  MedicalInfoSuccess({this.appCode});
+  final int? appCode;
+}
 
 final class MedicalInfoFailure extends MedicalInfoState {
   MedicalInfoFailure(this.message, this.appCode);

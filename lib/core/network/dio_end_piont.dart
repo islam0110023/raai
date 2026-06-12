@@ -17,6 +17,10 @@ class Endpoints {
   static String personalData = merge('/api/api/v1/auth/register/personal-data');
   static String selectRole = merge('/api/api/v1/auth/register/select-role');
   static String setMedical = merge('/api/api/v1/auth/register/health-profile');
+  static String setMedicalByCaregiver(int elderId) {
+    return merge('/api/api/v1/elders/$elderId/health-profile');
+  }
+
   static String addSugar = merge('/api/api/v1/auth/sugar-readings');
   static String addBlood = merge('/api/api/v1/auth/blood-pressure-readings');
   static String getSugarReads = merge('/api/api/v1/auth/sugar-readings');
@@ -34,4 +38,12 @@ class Endpoints {
   static String getMedications = merge('/api/api/v1/medications');
   static String analyzeVoice = merge('/ai/voice-assistant/message');
   static String getHomeData = merge('/api/api/v1/home');
+  static String getCaregiverHomeData = merge('/api/api/v1/caregivers/home');
+  static String getCaregiverProfileData = merge(
+    '/api/api/v1/caregivers/profile',
+  );
+  static String connectCaregiverWithElder = merge(
+    '/api/api/v1/caregivers/connect',
+  );
+  static String getCaregiverList = merge('/api/api/v1/elders/caregivers');
 }

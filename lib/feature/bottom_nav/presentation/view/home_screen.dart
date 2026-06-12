@@ -50,6 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final bottomNavCubit = context.watch<BottomNavCubit>();
+    final controller = context.read<BottomNavCubit>();
+
     _trackPageSelection(bottomNavCubit.currentIndex);
 
     return Scaffold(
@@ -75,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
         visible: !bottomNavCubit.isChat,
         replacement: const CustomChatBotSender(),
         child: CustomBottomNavBar(
-          controller: bottomNavCubit,
+          controller: controller,
           state: bottomNavCubit,
         ),
       ),

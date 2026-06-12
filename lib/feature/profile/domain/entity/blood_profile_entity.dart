@@ -20,5 +20,4 @@ class BloodProfileEntity {
   final String status;
   final Color statusColor;
   final Color trafficColor;
-
 }
