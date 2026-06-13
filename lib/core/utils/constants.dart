@@ -277,6 +277,10 @@ abstract class AppConstant {
     return times;
   }
 
+  static String formatTime1(DateTime dateTime) {
+    return DateFormat('hh:mm', 'en').format(dateTime);
+  }
+
   static String formatArabicTime(String time) {
     final parts = time.split(':');
 
@@ -292,6 +296,37 @@ abstract class AppConstant {
     }
 
     return '${hour.toString().padLeft(2, '0')}:$minute $period';
+  }
+
+  static String buildMedicationSummary({
+    required int taken,
+    required int missed,
+    required int upcoming,
+    required int snoozed,
+  }) {
+    final parts = <String>[];
+
+    if (taken > 0) {
+      parts.add('$taken تم أخذها');
+    }
+
+    if (missed > 0) {
+      parts.add('$missed متأخرة');
+    }
+
+    if (snoozed > 0) {
+      parts.add('$snoozed مؤجلة');
+    }
+
+    if (upcoming > 0) {
+      parts.add('$upcoming قادمة');
+    }
+
+    if (parts.isEmpty) {
+      return 'لا توجد جرعات';
+    }
+
+    return parts.join(' - ');
   }
 
   // static int calculateAge(String dateOfBirth) {

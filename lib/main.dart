@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -7,21 +8,31 @@ import 'package:go_router/go_router.dart';
 import 'package:raai/app_bloc_observer.dart';
 import 'package:raai/core/db/cache_helper/cache_helper.dart';
 import 'package:raai/core/network/dio_helper.dart';
+import 'package:raai/core/services/notification_service/local_notification_service.dart';
+import 'package:raai/core/services/notification_service/push_notification_service.dart';
 import 'package:raai/core/utils/app_color.dart';
 import 'package:raai/core/utils/constants.dart';
 import 'package:raai/core/utils/routes.dart';
 import 'package:raai/core/utils/service_locator.dart';
 import 'package:raai/feature/auth/presentation/manager/auth_cubit/auth_cubit.dart';
+import 'package:raai/firebase_options.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   final WidgetsBinding binding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: binding);
-  await EasyLocalization.ensureInitialized();
+  await Future.wait([
+    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
+    EasyLocalization.ensureInitialized(),
+    CacheHelper.init(),
+  ]);
   setUpServices();
   DioHelper.init();
-  await CacheHelper.init();
+  Future.wait([
+    LocalNotificationServices.init(),
+    PushNotificationsServices.init(),
+  ]);
   Bloc.observer = AppBlocObserver();
   runApp(
     EasyLocalization(

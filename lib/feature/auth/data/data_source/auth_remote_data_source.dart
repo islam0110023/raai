@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:raai/core/model/api_response.dart';
 import 'package:raai/core/network/dio_end_piont.dart';
 import 'package:raai/core/network/dio_helper.dart';
+import 'package:raai/core/services/notification_service/push_notification_service.dart';
 import 'package:raai/feature/auth/data/model/otp_verify_model/otp_verify_model.dart';
 import 'package:raai/feature/auth/data/model/otp_verify_model/reset_data.dart';
 import 'package:raai/feature/auth/data/model/otp_verify_model/tokens.dart';
@@ -163,9 +166,14 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
 
   @override
   Future<SelectRoleEntity> selectRole({required String role}) async {
+    final fcmToken = await PushNotificationsServices.getToken();
     final response = await DioHelper.postData(
       url: Endpoints.selectRole,
-      data: {'role': role},
+      data: {
+        'role': role,
+        'deviceToken': fcmToken,
+        'platform': Platform.isIOS ? 'ios' : 'android',
+      },
     );
     final data = ApiResponse.fromJson(response.data);
 

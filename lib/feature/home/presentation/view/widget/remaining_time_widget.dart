@@ -29,7 +29,10 @@ class _RemainingTimeWidgetState extends State<RemainingTimeWidget> {
   }
 
   String getRemainingTime() {
-    final difference = widget.medicationDate!.difference(DateTime.now());
+    final medicationDate = widget.medicationDate!.add(
+      const Duration(minutes: 1),
+    );
+    final difference = medicationDate.difference(DateTime.now());
 
     if (difference.isNegative) {
       return 'الأن';

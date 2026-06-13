@@ -75,21 +75,21 @@ class CustomCardMedication extends StatelessWidget {
               Text(data.name, style: AppTextStyles.s20.w600.textNormal),
               const RSizedBox(width: 8),
 
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(180),
-                  border: BoxBorder.all(
-                    color: AppColor.greenDarkHover,
-                    width: 1.r,
-                  ),
-                ),
-                padding: REdgeInsets.fromLTRB(7, 5, 3, 5),
-                child: const Icon(
-                  CupertinoIcons.play,
-                  color: AppColor.greenDarkHover,
-                  size: 16,
-                ),
-              ),
+              // Container(
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(180),
+              //     border: BoxBorder.all(
+              //       color: AppColor.greenDarkHover,
+              //       width: 1.r,
+              //     ),
+              //   ),
+              //   padding: REdgeInsets.fromLTRB(7, 5, 3, 5),
+              //   child: const Icon(
+              //     CupertinoIcons.play,
+              //     color: AppColor.greenDarkHover,
+              //     size: 16,
+              //   ),
+              // ),
               const Spacer(),
 
               Container(

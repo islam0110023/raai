@@ -22,6 +22,10 @@ import 'package:raai/feature/bottom_nav/data/data_source/voice_remote_data_sourc
 import 'package:raai/feature/bottom_nav/data/repo/voice_repo_impl.dart';
 import 'package:raai/feature/bottom_nav/domain/repo/voice_repo.dart';
 import 'package:raai/feature/bottom_nav/domain/use_case/analyze_voice_use_case.dart';
+import 'package:raai/feature/caregiver/all_medication_caregiver/data/data_source/all_medication_caregiver_remote_data_source.dart';
+import 'package:raai/feature/caregiver/all_medication_caregiver/data/repo/all_medication_caregiver_repo_impl.dart';
+import 'package:raai/feature/caregiver/all_medication_caregiver/domain/repo/all_medication_caregiver_repo.dart';
+import 'package:raai/feature/caregiver/all_medication_caregiver/domain/use_case/get_all_medication_in_caregiver_use_case.dart';
 import 'package:raai/feature/caregiver/connect_elder_caregiver/data/data_source/connect_elder_caregiver_remote_data_source.dart';
 import 'package:raai/feature/caregiver/connect_elder_caregiver/data/repo/connect_elder_caregiver_repo_impl.dart';
 import 'package:raai/feature/caregiver/connect_elder_caregiver/domain/repo/connect_elder_caregiver_repo.dart';
@@ -54,7 +58,11 @@ import 'package:raai/feature/medication/data/data_source/medication_remote_data_
 import 'package:raai/feature/medication/data/repo/medication_repo_impl.dart';
 import 'package:raai/feature/medication/domain/repo/medication_repo.dart';
 import 'package:raai/feature/medication/domain/use_case/create_medication_use_case.dart';
+import 'package:raai/feature/medication/domain/use_case/do_not_remember_use_case.dart';
 import 'package:raai/feature/medication/domain/use_case/get_medications_use_case.dart';
+import 'package:raai/feature/medication/domain/use_case/snooze_medication_use_case.dart';
+import 'package:raai/feature/medication/domain/use_case/tablet_model_use_case.dart';
+import 'package:raai/feature/medication/domain/use_case/take_medication_use_case.dart';
 import 'package:raai/feature/models/data/data_source/model_remote_data_source.dart';
 import 'package:raai/feature/models/data/repo/model_repo_impl.dart';
 import 'package:raai/feature/models/domain/repo/model_repo.dart';
@@ -129,6 +137,9 @@ void setUpServices() {
   getIt.registerLazySingleton<CaregiverRemoteDataSource>(
     () => CaregiverRemoteDataSourceImpl(),
   );
+  getIt.registerLazySingleton<AllMedicationCaregiverRemoteDataSource>(
+    () => AllMedicationCaregiverRemoteDataSourceImpl(),
+  );
 
   //Repo
   getIt.registerLazySingleton<ChatBotRepo>(() => ChatBotRepoImpl(getIt()));
@@ -155,7 +166,9 @@ void setUpServices() {
     () => ConnectElderCaregiverRepoImpl(getIt()),
   );
   getIt.registerLazySingleton<CaregiverRepo>(() => CaregiverRepoImpl(getIt()));
-
+  getIt.registerLazySingleton<AllMedicationCaregiverRepo>(
+    () => AllMedicationCaregiverRepoImpl(getIt()),
+  );
 
   //UseCase
   getIt.registerLazySingleton<GetMessagesUseCase>(
@@ -232,5 +245,20 @@ void setUpServices() {
   );
   getIt.registerLazySingleton<GetCaregiverListUseCase>(
     () => GetCaregiverListUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<TakeMedicationUseCase>(
+    () => TakeMedicationUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<SnoozeMedicationUseCase>(
+    () => SnoozeMedicationUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<GetAllMedicationInCaregiverUseCase>(
+    () => GetAllMedicationInCaregiverUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<DoNotRememberUseCase>(
+    () => DoNotRememberUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<TabletModelUseCase>(
+    () => TabletModelUseCase(getIt()),
   );
 }

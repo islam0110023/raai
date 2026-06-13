@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:raai/core/utils/app_color.dart';
 import 'package:raai/core/utils/routes.dart';
+import 'package:raai/feature/caregiver/all_medication_caregiver/presentation/view/all_medication_caregiver_view.dart';
 import 'package:raai/feature/caregiver/home_caregiver/presentation/manager/bottom_nav_caregiver_cubit.dart';
 import 'package:raai/feature/caregiver/home_caregiver/presentation/view/home_caregiver_view.dart';
 import 'package:raai/feature/caregiver/home_caregiver/presentation/view/widget/custom_bottom_nav_bar_caregiver.dart';
@@ -22,10 +23,16 @@ class BottomNavBarCaregiver extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       body: IndexedStack(
         index: state.currentIndex,
-        children: const [
-          HomeCaregiverView(),
-          SizedBox(),
-          ProfileCaregiverView(),
+        children: [
+          state.isSelected[0]
+              ? const HomeCaregiverView()
+              : const SizedBox.shrink(),
+          state.isSelected[1]
+              ? const AllMedicationCaregiverView()
+              : const SizedBox.shrink(),
+          state.isSelected[2]
+              ? const ProfileCaregiverView()
+              : const SizedBox.shrink(),
         ],
       ),
       bottomNavigationBar: CustomBottomNavBarCaregiver(

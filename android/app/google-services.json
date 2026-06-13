@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "805580122809",
+    "project_id": "raey-5b797",
+    "storage_bucket": "raey-5b797.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:805580122809:android:2e811072c069d7b88d8968",
+        "android_client_info": {
+          "package_name": "com.islamramadan.raai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9Q_iIR9vK6iAN1xswS60cZzdAO6DiQDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -203,8 +203,8 @@ class DioHelper {
   /// Returns a [Future] with a [Response] object.
   static Future<Response> patchData({
     required String url,
-    required Map<String, dynamic> data,
-    required String token,
+    Map<String, dynamic>? data,
+    String? token,
     Options? options,
   }) async {
     try {

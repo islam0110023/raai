@@ -72,7 +72,7 @@ class CustomListCaregiverList extends StatelessWidget {
                       builder: (contextDialog) {
                         return BlocProvider.value(
                           value: cubit,
-                          child: CustomDialogRemoveCaregiver(data: data,),
+                          child: CustomDialogRemoveCaregiver(data: data),
                         );
                       },
                     );

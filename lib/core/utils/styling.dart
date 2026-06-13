@@ -41,6 +41,9 @@ class FontWeightStyle {
   TextStyle get subTextNormal => _createStyle(color: AppColor.subtextNormal);
   TextStyle get textDark => _createStyle(color: AppColor.textDark);
   TextStyle get primaryNormal => _createStyle(color: AppColor.primaryNormal);
+  TextStyle get orangeNormalActive =>
+      _createStyle(color: AppColor.orangeNormalActive);
+  TextStyle get primaryLight => _createStyle(color: AppColor.primaryLight);
   TextStyle get primaryDarkActive =>
       _createStyle(color: AppColor.primaryDarkActive);
   TextStyle get greenDarker => _createStyle(color: AppColor.greenDarker);
@@ -50,6 +53,8 @@ class FontWeightStyle {
   TextStyle get redDarkHover => _createStyle(color: AppColor.redDarkHover);
   TextStyle get brownDarker => _createStyle(color: AppColor.brownDarker);
   TextStyle get disableNormal => _createStyle(color: AppColor.disableNormal);
+  TextStyle get disableDarkActive =>
+      _createStyle(color: AppColor.disableDarkActive);
   TextStyle get disableNormalHover =>
       _createStyle(color: AppColor.disableNormalHover);
   TextStyle get redNormal => _createStyle(color: AppColor.redNormal);
@@ -59,6 +64,7 @@ class FontWeightStyle {
   TextStyle get redNormalActive =>
       _createStyle(color: AppColor.redNormalActive);
   TextStyle get primaryDarker => _createStyle(color: AppColor.primaryDarker);
+  TextStyle get primaryDark => _createStyle(color: AppColor.primaryDark);
   TextStyle get secondaryDarkHover =>
       _createStyle(color: AppColor.secondaryDarkHover);
   TextStyle get secondaryLightHover =>

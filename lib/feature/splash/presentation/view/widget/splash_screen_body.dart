@@ -3,6 +3,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:raai/core/db/cache_helper/cache_helper.dart';
+import 'package:raai/core/services/notification_service/push_notification_service.dart';
 import 'package:raai/core/utils/app_color.dart';
 import 'package:raai/core/utils/asset_image.dart';
 import 'package:raai/core/utils/constants.dart';
@@ -75,15 +76,39 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
         false;
 
     if (!mounted) return;
-    if (isCaregiverLoggedIn == true) {
+    // if (isCaregiverLoggedIn == true) {
+    //   context.go(AppRoutes.homeScreenCaregiver);
+    //   return;
+    // }
+    //
+    // if (isLoggedIn == true) {
+    //   context.go(AppRoutes.homeScreen);
+    // } else {
+    //   context.go(AppRoutes.onBoarding);
+    // }
+    if (isCaregiverLoggedIn) {
       context.go(AppRoutes.homeScreenCaregiver);
-      return;
-    }
-
-    if (isLoggedIn == true) {
+    } else if (isLoggedIn) {
       context.go(AppRoutes.homeScreen);
     } else {
       context.go(AppRoutes.onBoarding);
+      return;
+    }
+    final pendingMessage = NotificationNavigation.pendingMessage;
+
+    if (pendingMessage != null) {
+      NotificationNavigation.pendingMessage = null;
+
+      Future.delayed(const Duration(milliseconds: 500), () {
+        if (pendingMessage.data['type'] == 'MEDICATION_REMINDER') {
+          AppRoutes.route.push(
+            AppRoutes.medicationReminder,
+            extra: pendingMessage.data,
+          );
+        } else {
+          AppRoutes.route.push(AppRoutes.notificationScreen);
+        }
+      });
     }
   }
 

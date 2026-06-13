@@ -32,8 +32,12 @@ import 'package:raai/feature/medical_information/presentation/manager/medical_in
 import 'package:raai/feature/medical_information/presentation/view/confirmation_screen.dart';
 import 'package:raai/feature/medical_information/presentation/view/medical_information_screen.dart';
 import 'package:raai/feature/medication/presenation/manager/add_medication/add_medication_cubit.dart';
+import 'package:raai/feature/medication/presenation/manager/medication_check_dose/medication_check_dose_cubit.dart';
 import 'package:raai/feature/medication/presenation/manager/medication_form_cubit.dart';
+import 'package:raai/feature/medication/presenation/manager/medication_reminder/medication_reminder_cubit.dart';
 import 'package:raai/feature/medication/presenation/view/add_medication_screen.dart';
+import 'package:raai/feature/medication/presenation/view/medication_check_dose_screen.dart';
+import 'package:raai/feature/medication/presenation/view/medication_reminder_screen.dart';
 import 'package:raai/feature/models/presentation/manager/sugar_daily/sugar_daily_cubit.dart';
 import 'package:raai/feature/models/presentation/manager/sugar_monthly/sugar_monthly_cubit.dart';
 import 'package:raai/feature/models/presentation/view/select_models_screen.dart';
@@ -73,6 +77,8 @@ class AppRoutes {
   static const addMedication = '/add-medication';
   static const homeScreenCaregiver = '/home-screen-caregiver';
   static const connectElderCaregiver = '/connect-elder-caregiver';
+  static final medicationReminder = '/medication-reminder';
+  static final medicationCheckDose = '/medication-check-dose';
 
   static final route = GoRouter(
     navigatorKey: navigatorKey,
@@ -239,6 +245,20 @@ class AppRoutes {
         builder: (context, state) => BlocProvider(
           create: (context) => ConnectElderCaregiverCubit(getIt()),
           child: const ConnectElderCaregiverScreen(),
+        ),
+      ),
+      GoRoute(
+        path: medicationReminder,
+        builder: (context, state) => BlocProvider(
+          create: (context) => MedicationReminderCubit(getIt(), getIt()),
+          child: const MedicationReminderScreen(),
+        ),
+      ),
+      GoRoute(
+        path: medicationCheckDose,
+        builder: (context, state) => BlocProvider(
+          create: (context) => MedicationCheckDoseCubit(getIt(), getIt()),
+          child: const MedicationCheckDoseScreen(),
         ),
       ),
     ],

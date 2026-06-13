@@ -21,6 +21,18 @@ class Endpoints {
     return merge('/api/api/v1/elders/$elderId/health-profile');
   }
 
+  static String takeMedication(int doseId) {
+    return merge('/api/api/v1/medications/doses/$doseId/taken');
+  }
+
+  static String snoozeMedication(int doseId) {
+    return merge('/api/api/v1/medications/doses/$doseId/snooze');
+  }
+
+  static String doNotRemember(int medicationId) {
+    return merge('/api/api/v1/medications/$medicationId/verify-pills');
+  }
+
   static String addSugar = merge('/api/api/v1/auth/sugar-readings');
   static String addBlood = merge('/api/api/v1/auth/blood-pressure-readings');
   static String getSugarReads = merge('/api/api/v1/auth/sugar-readings');
@@ -46,4 +58,8 @@ class Endpoints {
     '/api/api/v1/caregivers/connect',
   );
   static String getCaregiverList = merge('/api/api/v1/elders/caregivers');
+  static String allMedicationInCaregiver = merge(
+    '/api/api/v1/caregivers/medications',
+  );
+  static String tabletModel = merge('/ai/tablet-blisters/analyze');
 }

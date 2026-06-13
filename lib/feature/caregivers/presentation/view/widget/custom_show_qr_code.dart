@@ -13,7 +13,11 @@ class CustomShowQrCode extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        QrImageView(data: elderCode.toString(), size: 200.r, version: QrVersions.auto),
+        QrImageView(
+          data: elderCode.toString(),
+          size: 200.r,
+          version: QrVersions.auto,
+        ),
         CustomPaint(size: Size(230.r, 230.r), painter: QRBorderPainter()),
       ],
     );

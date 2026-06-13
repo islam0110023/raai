@@ -91,7 +91,11 @@ class VoiceAssistantCubit extends Cubit<VoiceAssistantState> {
         ),
       );
       await _speechToText.listen(
-        listenOptions: SpeechListenOptions(localeId: 'ar_EG'),
+        listenOptions: SpeechListenOptions(
+          localeId: 'ar_EG',
+          pauseFor: const Duration(minutes: 1),
+          listenFor: const Duration(minutes: 1),
+        ),
         // pauseFor: const Duration(seconds: 4),
         // listenFor: const Duration(seconds: 20),
         onResult: (result) {
